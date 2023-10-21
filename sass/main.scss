@@ -19,3 +19,165 @@ $font-inconsolata: "Inconsolata", monospace;
 // ********** FONT-WEIGHTS ***********
 $fw-400: 400;
 $fw-700: 700;
+
+// ************** BASE ***************
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+body {
+  background: $color-white;
+  font-family: $font-inter;
+  padding: 2.4rem 2.4rem 8.5rem;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+// ********** 375px LAYOUT ***********
+
+// ************* HEADER **************
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.4rem;
+
+  &__logo {
+    width: 2.8055rem;
+    height: 3.2rem;
+  }
+
+  &__font-toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+  }
+
+  &__font-container {
+    display: flex;
+    gap: 1.6rem;
+  }
+
+  &__font {
+    color: $color-thunder;
+    font-size: 1.4rem;
+    font-weight: $fw-700;
+    line-height: 2.4rem;
+  }
+
+  &__vertical-line {
+    width: 0.1rem;
+    height: 3.2rem;
+    background: $color-greenWhite;
+  }
+
+  &__toggle-moon-container {
+    display: flex;
+    gap: 1.2rem;
+  }
+
+  &__toggle-btn {
+    background: none;
+    border: none;
+    position: relative;
+    width: 4rem;
+    height: 2rem;
+  }
+
+  &__toggle-rectangle {
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    background: $color-boulder;
+  }
+
+  &__toggle-oval {
+    width: 1.4rem;
+    height: 1.4rem;
+    border-radius: 1.4rem;
+    background: $color-white;
+    position: absolute;
+    top: 0.3rem;
+    left: 0.3rem;
+  }
+}
+
+// ************** FORM **************
+.form {
+  &__input-container {
+    position: relative;
+    margin-bottom: 2.4rem;
+  }
+
+  &__input {
+    width: 100%;
+    height: 4.8rem;
+    border-radius: 1.6rem;
+    background: $color-whiteSmoke;
+    border: none;
+    padding-left: 2.4rem;
+    color: $color-thunder;
+    font-family: inherit;
+    font-size: 1.6rem;
+    font-weight: $fw-700;
+  }
+
+  &__search-btn {
+    border: none;
+    background: none;
+    position: absolute;
+    top: 1.6rem;
+    right: 2.44rem;
+  }
+}
+
+// ** WORD-PHONETIC-AUDIO-CONTAINER **
+.word-phonetic-audio-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.word-phonetic-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.word {
+  color: $color-thunder;
+  font-size: 3.2rem;
+  font-weight: $fw-700;
+}
+
+.phonetic {
+  color: $color-jasminePurple;
+  font-size: 1.8rem;
+  line-height: 2.4rem;
+}
+
+.play-audio {
+  &-btn {
+    border: none;
+    background: none;
+    width: 4.8rem;
+    height: 4.8rem;
+  }
+
+  &-icon {
+    width: 4.8rem;
+    height: 4.8rem;
+  }
+}

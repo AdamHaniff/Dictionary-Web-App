@@ -10,6 +10,7 @@
   "author": "Adam Haniff",
   "license": "ISC",
   "devDependencies": {
+    "@parcel/transformer-sass": "^2.10.0",
     "node-sass": "^9.0.0",
     "parcel": "^2.10.0"
   },

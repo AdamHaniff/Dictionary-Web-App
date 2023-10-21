@@ -1,1 +1,139 @@
-/*# sourceMappingURL=main.css.map */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+body {
+  background: #fff;
+  font-family: "Inter", sans-serif;
+  padding: 2.4rem 2.4rem 8.5rem;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.4rem;
+}
+.header__logo {
+  width: 2.8055rem;
+  height: 3.2rem;
+}
+.header__font-toggle-container {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+.header__font-container {
+  display: flex;
+  gap: 1.6rem;
+}
+.header__font {
+  color: #2d2d2d;
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 2.4rem;
+}
+.header__vertical-line {
+  width: 0.1rem;
+  height: 3.2rem;
+  background: #e9e9e9;
+}
+.header__toggle-moon-container {
+  display: flex;
+  gap: 1.2rem;
+}
+.header__toggle-btn {
+  background: none;
+  border: none;
+  position: relative;
+  width: 4rem;
+  height: 2rem;
+}
+.header__toggle-rectangle {
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  background: #757575;
+}
+.header__toggle-oval {
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 1.4rem;
+  background: #fff;
+  position: absolute;
+  top: 0.3rem;
+  left: 0.3rem;
+}
+
+.form__input-container {
+  position: relative;
+  margin-bottom: 2.4rem;
+}
+.form__input {
+  width: 100%;
+  height: 4.8rem;
+  border-radius: 1.6rem;
+  background: #f4f4f4;
+  border: none;
+  padding-left: 2.4rem;
+  color: #2d2d2d;
+  font-family: inherit;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+.form__search-btn {
+  border: none;
+  background: none;
+  position: absolute;
+  top: 1.6rem;
+  right: 2.44rem;
+}
+
+.word-phonetic-audio-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.word-phonetic-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.word {
+  color: #2d2d2d;
+  font-size: 3.2rem;
+  font-weight: 700;
+}
+
+.phonetic {
+  color: #a445ed;
+  font-size: 1.8rem;
+  line-height: 2.4rem;
+}
+
+.play-audio-btn {
+  border: none;
+  background: none;
+  width: 4.8rem;
+  height: 4.8rem;
+}
+.play-audio-icon {
+  width: 4.8rem;
+  height: 4.8rem;
+}/*# sourceMappingURL=main.css.map */
