@@ -148,6 +148,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 2.9rem;
 }
 
 .word-phonetic-container {
@@ -172,12 +173,40 @@ body {
   &-btn {
     border: none;
     background: none;
-    width: 4.8rem;
-    height: 4.8rem;
   }
 
+  &-btn,
   &-icon {
     width: 4.8rem;
     height: 4.8rem;
   }
+}
+
+// ** PART OF SPEECH LINE CONTAINER **
+.part-of-speech-line-container {
+  display: flex;
+  gap: 1.6rem;
+  align-items: center;
+  height: 2.1rem;
+  margin-bottom: 3.2rem;
+}
+
+.part-of-speech {
+  color: $color-thunder;
+  font-size: 1.8rem;
+  font-style: italic;
+  font-weight: $fw-700;
+}
+
+.horizontal-line {
+  flex: 1;
+  border: 0.1rem solid $color-greenWhite;
+}
+
+// ********** WORD MEANINGS **********
+.meaning-text {
+  display: inline-block;
+  color: $color-boulder;
+  font-size: 1.6rem;
+  margin-bottom: 1.7rem;
 }
