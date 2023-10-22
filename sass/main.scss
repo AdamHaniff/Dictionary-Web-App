@@ -210,3 +210,15 @@ body {
   font-size: 1.6rem;
   margin-bottom: 1.7rem;
 }
+
+.bullet-meaning-container {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.word-meaning {
+  color: $color-thunder;
+  font-size: 1.5rem;
+  line-height: 2.4rem;
+}

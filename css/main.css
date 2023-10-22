@@ -162,4 +162,16 @@ body {
   color: #757575;
   font-size: 1.6rem;
   margin-bottom: 1.7rem;
+}
+
+.bullet-meaning-container {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.word-meaning {
+  color: #2d2d2d;
+  font-size: 1.5rem;
+  line-height: 2.4rem;
 }/*# sourceMappingURL=main.css.map */
