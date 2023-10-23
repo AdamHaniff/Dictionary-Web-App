@@ -204,6 +204,10 @@ body {
 }
 
 // ********** WORD MEANINGS **********
+.word-meanings {
+  margin-bottom: 3.3rem;
+}
+
 .meaning-text {
   display: inline-block;
   color: $color-boulder;
@@ -211,14 +215,49 @@ body {
   margin-bottom: 1.7rem;
 }
 
+.meanings {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+  margin-bottom: 2.4rem;
+}
+
 .bullet-meaning-container {
   display: flex;
-  align-items: center;
+  align-items: start;
   gap: 2rem;
+}
+
+.bullet-point {
+  margin-top: 1rem;
 }
 
 .word-meaning {
   color: $color-thunder;
   font-size: 1.5rem;
   line-height: 2.4rem;
+  flex: 1;
+}
+
+.synonyms-container {
+  display: flex;
+  gap: 2.4rem;
+}
+
+.synonyms-text {
+  color: $color-boulder;
+  font-size: 1.6rem;
+}
+
+.synonym {
+  color: $color-jasminePurple;
+  font-size: 1.6rem;
+  font-weight: $fw-700;
+}
+
+.word-example {
+  color: $color-boulder;
+  font-size: 1.5rem;
+  line-height: 2.4rem;
+  margin-left: 2.5rem;
 }
