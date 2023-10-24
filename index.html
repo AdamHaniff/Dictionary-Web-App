@@ -76,6 +76,7 @@
           />
         </button>
       </div>
+      <span class="form__input-error hidden">Whoops, can't be empty...</span>
     </form>
     <div class="word-phonetic-audio-container">
       <div class="word-phonetic-container">
@@ -189,12 +190,25 @@
     </div>
     <div class="source">
       <span class="source__text">Source</span>
-      <a class="source__link">https://en.wiktionary.org/wiki/keyboard</a>
-      <img
-        class="source__new-window"
-        src="./assets/images/icon-new-window.svg"
-        alt="New window icon"
-      />
+      <div class="source__link-window">
+        <a
+          class="source__link"
+          href="https://en.wiktionary.org/wiki/keyboard"
+          target="_blank"
+          >https://en.wiktionary.org/wiki/keyboard</a
+        >
+        <a
+          class="source__new-window-link"
+          href="https://en.wiktionary.org/wiki/keyboard"
+          target="_blank"
+        >
+          <img
+            class="source__new-window-icon"
+            src="./assets/images/icon-new-window.svg"
+            alt="New window icon"
+          />
+        </a>
+      </div>
     </div>
   </body>
 </html>
