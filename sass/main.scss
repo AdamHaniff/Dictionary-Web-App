@@ -12,6 +12,7 @@ $color-darkJungleGreen: #1f1f1f;
 $color-iridium: #3a3a3a;
 $color-quillGrey: #d4d4d4;
 $color-sunsetOrange: #ff5252;
+$color-silverSand: rgba(45, 45, 45, 0.25);
 
 // ********** FONT-FAMILIES **********
 $font-inter: "Inter", sans-serif;
@@ -39,7 +40,7 @@ html {
 body {
   background: $color-white;
   font-family: $font-inter;
-  padding: 2.4rem 2.4rem 8.5rem;
+  padding: 2.4rem 2.4rem 0;
 }
 
 // ********** 375px LAYOUT ***********
@@ -137,7 +138,7 @@ body {
     }
 
     &::placeholder {
-      color: rgba(45, 45, 45, 0.25);
+      color: $color-silverSand;
     }
   }
 
@@ -279,7 +280,7 @@ body {
 // ************* SOURCE **************
 .source {
   border-top: 0.1rem solid $color-greenWhite;
-  padding-top: 2.4rem;
+  padding: 2.4rem 0 8.5rem;
 
   &__text {
     display: block;
@@ -305,6 +306,31 @@ body {
   &__new-window-link {
     width: 1.4rem;
     height: 1.4rem;
+  }
+}
+
+// ************ NOT FOUND ************
+.not-found {
+  text-align: center;
+
+  &__emoji {
+    display: block;
+    font-size: 5.12rem;
+    margin-bottom: 3.52rem;
+  }
+
+  &__text {
+    display: inline-block;
+    color: $color-thunder;
+    font-size: 1.6rem;
+    font-weight: $fw-700;
+    margin-bottom: 1.92rem;
+  }
+
+  &__apology {
+    color: $color-boulder;
+    font-size: 1.44rem;
+    line-height: 1.92rem;
   }
 }
 
