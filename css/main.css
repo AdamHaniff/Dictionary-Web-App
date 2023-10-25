@@ -35,12 +35,41 @@ body {
 .header__font-container {
   display: flex;
   gap: 1.6rem;
+  position: relative;
 }
 .header__font {
   color: #2d2d2d;
   font-size: 1.4rem;
   font-weight: 700;
   line-height: 2.4rem;
+}
+.header__font-styles {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 1.26rem;
+  width: 14.4rem;
+  height: 12rem;
+  border-radius: 1.6rem;
+  background: #fff;
+  box-shadow: 0 0.5rem 3rem 0 rgba(0, 0, 0, 0.1);
+  padding: 1.9rem 0 0 1.9rem;
+  position: absolute;
+  top: 3.8rem;
+  right: 0;
+  z-index: 10;
+}
+.header__font-style {
+  color: #2d2d2d;
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.9rem;
+}
+.header__font-style:nth-child(2) {
+  font-family: "Lora", serif;
+}
+.header__font-style:last-child {
+  font-family: "Inconsolata", monospace;
 }
 .header__vertical-line {
   width: 0.1rem;
@@ -257,6 +286,7 @@ body {
 
 .not-found {
   text-align: center;
+  margin-top: 6rem;
 }
 .not-found__emoji {
   display: block;
