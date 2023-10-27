@@ -233,18 +233,24 @@ body {
   flex: 1;
 }
 
-.synonyms-container {
+.related-terms-container {
   display: flex;
   gap: 2.4rem;
   margin-top: 2.4rem;
 }
 
-.synonyms-text {
+.related-terms-text {
   color: #757575;
   font-size: 1.6rem;
 }
 
-.synonym {
+.related-terms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.3rem;
+}
+
+.related-term {
   color: #a445ed;
   font-size: 1.6rem;
   font-weight: 700;
