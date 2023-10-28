@@ -121,6 +121,31 @@ async function handleFormSubmit(e) {
         const meaningsDiv = document.querySelectorAll(".meanings")[i];
         meaningsDiv.insertAdjacentHTML("beforeend", bulletMeaningContainerHTML);
       }
+
+      // Insert 'related-terms-container' if synonyms exist
+      const synonyms = meanings[i].synonyms;
+      const antonyms = meanings[i].antonyms;
+
+      if (synonyms.length > 0) {
+        const synonymsHTML = `
+        <div class="related-terms-container">
+          <span class="related-terms-text">Synonyms</span>
+          <div class="related-terms"></div>
+        </div>`;
+
+        const wordMeaningsDiv = document.querySelectorAll(".word-meanings")[i];
+        wordMeaningsDiv.insertAdjacentHTML("beforeend", synonymsHTML);
+
+        // Loop over the 'synonyms' array and add each synonym to the 'related-terms' div
+        const relatedTermsDiv = document.querySelectorAll(".related-terms")[0];
+        for (let synonym of synonyms) {
+          const relatedTermHTML = `
+          <span class="related-term">${synonym}</span>
+          `;
+
+          relatedTermsDiv.insertAdjacentHTML("beforeend", relatedTermHTML);
+        }
+      }
     }
   } catch (error) {
     console.error("Error:", error);
