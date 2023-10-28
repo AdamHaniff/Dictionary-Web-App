@@ -226,11 +226,23 @@ body {
   margin-top: 1rem;
 }
 
+.word-meaning-example {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+  flex: 1;
+}
+
 .word-meaning {
   color: #2d2d2d;
   font-size: 1.5rem;
   line-height: 2.4rem;
-  flex: 1;
+}
+
+.word-example {
+  color: #757575;
+  font-size: 1.5rem;
+  line-height: 2.4rem;
 }
 
 .related-terms-container {
@@ -254,13 +266,6 @@ body {
   color: #a445ed;
   font-size: 1.6rem;
   font-weight: 700;
-}
-
-.word-example {
-  color: #757575;
-  font-size: 1.5rem;
-  line-height: 2.4rem;
-  margin: 1.3rem 0 0 2.5rem;
 }
 
 .source {

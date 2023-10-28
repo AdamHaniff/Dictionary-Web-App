@@ -92,7 +92,7 @@ async function handleFormSubmit(e) {
       resultsContainer.insertAdjacentHTML("beforeend", wordMeaningsHTML);
 
       // Insert each definition into the "meanings" div
-      const definitions = data[0].meanings[i].definitions;
+      const definitions = meanings[i].definitions;
       for (let definition of definitions) {
         const bulletMeaningContainerHTML = `
         <div class="bullet-meaning-container">
@@ -106,17 +106,21 @@ async function handleFormSubmit(e) {
           >
             <circle cx="2.5" cy="2.5" r="2.5" fill="#8F19E8" />
           </svg>
-          <p class="word-meaning">
-            ${definition.definition}
-          </p>
+          <div class="word-meaning-example">
+            <p class="word-meaning">
+             ${definition.definition}
+            </p>
+            ${
+              definition.hasOwnProperty("example")
+                ? `<p class="word-example">“${definition.example}”</p>`
+                : ""
+            }
+          </div>
         </div>`;
 
         const meaningsDiv = document.querySelectorAll(".meanings")[i];
         meaningsDiv.insertAdjacentHTML("beforeend", bulletMeaningContainerHTML);
       }
-
-      // Insert example if it exists into 'word-meanings' div
-      const wordMeaningsDiv = document.querySelectorAll(".word-meanings")[i];
     }
   } catch (error) {
     console.error("Error:", error);
