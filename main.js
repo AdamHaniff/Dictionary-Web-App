@@ -5,6 +5,8 @@ import "regenerator-runtime/runtime";
 const form = document.querySelector(".form");
 const formInput = document.querySelector(".form__input");
 const resultsContainer = document.querySelector(".results-container");
+let synonymsCount = -1;
+let antonymsCount = -1;
 
 // FUNCTIONS
 function isAudioAvailable(phonetics) {
@@ -122,31 +124,60 @@ async function handleFormSubmit(e) {
         meaningsDiv.insertAdjacentHTML("beforeend", bulletMeaningContainerHTML);
       }
 
-      // Insert 'related-terms-container' if synonyms exist
+      // Insert 'synonyms-container' if synonyms exist
       const synonyms = meanings[i].synonyms;
-      const antonyms = meanings[i].antonyms;
 
       if (synonyms.length > 0) {
-        const synonymsHTML = `
-        <div class="related-terms-container">
-          <span class="related-terms-text">Synonyms</span>
-          <div class="related-terms"></div>
+        synonymsCount++;
+        const synonymsContainerHTML = `
+        <div class="synonyms-container">
+          <span class="synonyms-text">Synonyms</span>
+          <div class="synonyms"></div>
         </div>`;
 
         const wordMeaningsDiv = document.querySelectorAll(".word-meanings")[i];
-        wordMeaningsDiv.insertAdjacentHTML("beforeend", synonymsHTML);
+        wordMeaningsDiv.insertAdjacentHTML("beforeend", synonymsContainerHTML);
 
-        // Loop over the 'synonyms' array and add each synonym to the 'related-terms' div
-        const relatedTermsDiv = document.querySelectorAll(".related-terms")[0];
+        // Loop over the 'synonyms' array and add each synonym to the 'synonyms' div
+        const synonymsDiv =
+          document.querySelectorAll(".synonyms")[synonymsCount];
         for (let synonym of synonyms) {
-          const relatedTermHTML = `
-          <span class="related-term">${synonym}</span>
+          const synonymHTML = `
+          <span class="synonym">${synonym}</span>
           `;
 
-          relatedTermsDiv.insertAdjacentHTML("beforeend", relatedTermHTML);
+          synonymsDiv.insertAdjacentHTML("beforeend", synonymHTML);
+        }
+      }
+
+      // Insert 'antonyms-container' if antonyms exist
+      const antonyms = meanings[i].antonyms;
+
+      if (antonyms.length > 0) {
+        antonymsCount++;
+        const antonymsContainerHTML = `
+        <div class="antonyms-container">
+          <span class="antonyms-text">Antonyms</span>
+          <div class="antonyms"></div>
+        </div>`;
+
+        const wordMeaningsDiv = document.querySelectorAll(".word-meanings")[i];
+        wordMeaningsDiv.insertAdjacentHTML("beforeend", antonymsContainerHTML);
+
+        // Loop over the 'antonyms' array and add each antonym to the 'antonyms' div
+        const antonymsDiv =
+          document.querySelectorAll(".antonyms")[antonymsCount];
+        for (let antonym of antonyms) {
+          const antonymHTML = `
+          <span class="antonym">${antonym}</span>
+          `;
+
+          antonymsDiv.insertAdjacentHTML("beforeend", antonymHTML);
         }
       }
     }
+
+    // INSERT SOURCE CONTAINER HERE
   } catch (error) {
     console.error("Error:", error);
   }

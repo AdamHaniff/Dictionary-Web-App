@@ -298,24 +298,28 @@ body {
   line-height: 2.4rem;
 }
 
-.related-terms-container {
+.synonyms-container,
+.antonyms-container {
   display: flex;
   gap: 2.4rem;
   margin-top: 2.4rem;
 }
 
-.related-terms-text {
+.synonyms-text,
+.antonyms-text {
   color: $color-boulder;
   font-size: 1.6rem;
 }
 
-.related-terms {
+.synonyms,
+.antonyms {
   display: flex;
   flex-wrap: wrap;
   gap: 1.3rem;
 }
 
-.related-term {
+.synonym,
+.antonym {
   color: $color-jasminePurple;
   font-size: 1.6rem;
   font-weight: $fw-700;
