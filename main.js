@@ -1,3 +1,4 @@
+import newWindowIcon from "url:./assets/images/icon-new-window.svg";
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 
@@ -9,6 +10,18 @@ let synonymsCount = -1;
 let antonymsCount = -1;
 
 // FUNCTIONS
+function getPhonetic(phonetics) {
+  let phoneticValue = "";
+  for (let phonetic of phonetics) {
+    if (phonetic.text) {
+      phoneticValue = phonetic.text;
+      break;
+    }
+  }
+
+  return phoneticValue;
+}
+
 function isAudioAvailable(phonetics) {
   for (let phonetic of phonetics) {
     if (phonetic.audio) return true;
@@ -37,16 +50,16 @@ async function handleFormSubmit(e) {
     console.log(data);
 
     // Generate and insert HTML based on the data
+    const phonetics = data[0].phonetics;
     resultsContainer.innerHTML = `
     <div class="word-phonetic-audio-container">
       <div class="word-phonetic-container">
         <span class="word">${data[0].word}</span>
-        <span class="phonetic">${data[0].phonetic}</span>
+        <span class="phonetic">${getPhonetic(phonetics)}</span>
       </div>
     </div>`;
 
     // Check if audio pronunciation is available
-    const phonetics = data[0].phonetics;
     const playAudioBtnHTML = `
       <button class="play-audio-btn">
         <svg
@@ -177,7 +190,33 @@ async function handleFormSubmit(e) {
       }
     }
 
-    // INSERT SOURCE CONTAINER HERE
+    // Insert source container
+    const sourceLink = data[0].sourceUrls[0];
+    const sourceContainerHTML = `
+    <div class="source">
+      <span class="source__text">Source</span>
+      <div class="source__link-window">
+        <a
+          class="source__link"
+          href="${sourceLink}"
+          target="_blank"
+          >${sourceLink}</a
+        >
+        <a
+          class="source__new-window-link"
+          href="${sourceLink}"
+          target="_blank"
+        >
+          <img
+            class="source__new-window-icon"
+            src=${newWindowIcon}
+            alt="New window icon"
+          />
+        </a>
+      </div>
+    </div>`;
+
+    resultsContainer.insertAdjacentHTML("beforeend", sourceContainerHTML);
   } catch (error) {
     console.error("Error:", error);
   }
