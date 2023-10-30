@@ -6,6 +6,10 @@ import "regenerator-runtime/runtime";
 const form = document.querySelector(".form");
 const formInput = document.querySelector(".form__input");
 const resultsContainer = document.querySelector(".results-container");
+let data;
+let phonetics;
+let audioElement;
+let playAudioBtn;
 let synonymsCount = -1;
 let antonymsCount = -1;
 
@@ -24,7 +28,8 @@ function getPhonetic(phonetics) {
 
 function isAudioAvailable(phonetics) {
   for (let phonetic of phonetics) {
-    if (phonetic.audio) return true;
+    if (phonetic.audio.includes("/en/") && phonetic.audio.includes("-us."))
+      return true;
   }
 
   return false;
@@ -45,12 +50,12 @@ async function handleFormSubmit(e) {
       // Error handling for empty string and not a word goes here:
     }
 
-    const data = await response.json();
+    data = await response.json();
     // Have to remove this console.log
     console.log(data);
 
     // Generate and insert HTML based on the data
-    const phonetics = data[0].phonetics;
+    phonetics = data[0].phonetics;
     resultsContainer.innerHTML = `
     <div class="word-phonetic-audio-container">
       <div class="word-phonetic-container">
@@ -88,6 +93,9 @@ async function handleFormSubmit(e) {
         "beforeend",
         playAudioBtnHTML
       );
+
+      audioElement = document.querySelector(".pronunciation-audio");
+      playAudioBtn = document.querySelector(".play-audio-btn");
     }
 
     // Insert 'word-meanings' div based on how many meanings there are
@@ -224,3 +232,23 @@ async function handleFormSubmit(e) {
 
 // EVENT LISTENERS
 form.addEventListener("submit", handleFormSubmit);
+
+resultsContainer.addEventListener("click", function (e) {
+  const playAudioBtn = e.target.closest(".play-audio-btn");
+  if (!playAudioBtn) return;
+
+  let audioURL;
+  for (let phonetic of phonetics) {
+    if (phonetic.audio.includes("/en/") && phonetic.audio.includes("-us.")) {
+      audioURL = phonetic.audio;
+      break;
+    }
+  }
+
+  // Set the audio source to the URL
+  audioElement.src = audioURL;
+
+  // Load and play the audio
+  audioElement.load();
+  audioElement.play();
+});
