@@ -6,36 +6,54 @@ import "regenerator-runtime/runtime";
 const form = document.querySelector(".form");
 const formInput = document.querySelector(".form__input");
 const resultsContainer = document.querySelector(".results-container");
+const { language, location } = getLanguageAndLocation();
 let data;
 let phonetics;
 let audioElement;
-let playAudioBtn;
 let synonymsCount = -1;
 let antonymsCount = -1;
 
-// FUNCTIONS
+// CODE FOR GETTING WORD DEFINITION
+
+// HELPER FUNCTIONS
+function getLanguageAndLocation() {
+  const preferredLanguage = navigator.language;
+  const [language, location] = preferredLanguage.split("-");
+  return { language, location };
+}
+
+function doesPhoneticAudioMatch(phonetic, language, location) {
+  const languageSubstring = `/${language}/`;
+  const locationSubstring = `-${location.toLowerCase()}`;
+
+  return (
+    phonetic.audio.includes(languageSubstring) &&
+    phonetic.audio.includes(locationSubstring)
+  );
+}
+
 function getPhonetic(phonetics) {
-  let phoneticValue = "";
-  for (let phonetic of phonetics) {
-    if (phonetic.text) {
-      phoneticValue = phonetic.text;
-      break;
-    }
-  }
+  const phonetic = phonetics.find((phonetic) =>
+    doesPhoneticAudioMatch(phonetic, language, location)
+  );
+
+  const phoneticValue = phonetic?.text || "";
 
   return phoneticValue;
 }
 
 function isAudioAvailable(phonetics) {
-  for (let phonetic of phonetics) {
-    if (phonetic.audio.includes("/en/") && phonetic.audio.includes("-us."))
-      return true;
-  }
-
-  return false;
+  // for (let phonetic of phonetics) {
+  //   if (doesPhoneticAudioMatch(phonetic, language, location)) return true;
+  // }
+  // const phonetic = phonetics.find((phonetic) =>
+  //   doesPhoneticAudioMatch(phonetic, language, location)
+  // );
+  // return phonetic || false;
+  // return false;
 }
 
-// EVENT LISTENER CALLBACK FUNCTIONS
+// EVENT LISTENER CALLBACK FUNCTION
 async function handleFormSubmit(e) {
   e.preventDefault();
   const word = formInput.value;
@@ -230,16 +248,19 @@ async function handleFormSubmit(e) {
   }
 }
 
-// EVENT LISTENERS
+// EVENT LISTENER
 form.addEventListener("submit", handleFormSubmit);
 
-resultsContainer.addEventListener("click", function (e) {
+// CODE FOR CLICKING ON 'playAudioBtn'
+
+// EVENT LISTENER CALLBACK FUNCTION
+function handlePlayAudioBtnClick(e) {
   const playAudioBtn = e.target.closest(".play-audio-btn");
   if (!playAudioBtn) return;
 
   let audioURL;
   for (let phonetic of phonetics) {
-    if (phonetic.audio.includes("/en/") && phonetic.audio.includes("-us.")) {
+    if (doesPhoneticAudioMatch(phonetic, language, location)) {
       audioURL = phonetic.audio;
       break;
     }
@@ -251,4 +272,7 @@ resultsContainer.addEventListener("click", function (e) {
   // Load and play the audio
   audioElement.load();
   audioElement.play();
-});
+}
+
+// EVENT LISTENER
+resultsContainer.addEventListener("click", handlePlayAudioBtnClick);
