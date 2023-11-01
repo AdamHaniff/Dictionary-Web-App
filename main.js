@@ -43,14 +43,9 @@ function getPhonetic(phonetics) {
 }
 
 function isAudioAvailable(phonetics) {
-  // for (let phonetic of phonetics) {
-  //   if (doesPhoneticAudioMatch(phonetic, language, location)) return true;
-  // }
-  // const phonetic = phonetics.find((phonetic) =>
-  //   doesPhoneticAudioMatch(phonetic, language, location)
-  // );
-  // return phonetic || false;
-  // return false;
+  return phonetics.some((phonetic) =>
+    doesPhoneticAudioMatch(phonetic, language, location)
+  );
 }
 
 // EVENT LISTENER CALLBACK FUNCTION
@@ -113,7 +108,6 @@ async function handleFormSubmit(e) {
       );
 
       audioElement = document.querySelector(".pronunciation-audio");
-      playAudioBtn = document.querySelector(".play-audio-btn");
     }
 
     // Insert 'word-meanings' div based on how many meanings there are
@@ -217,7 +211,8 @@ async function handleFormSubmit(e) {
     }
 
     // Insert source container
-    const sourceLink = data[0].sourceUrls[0];
+    const sourceUrls = data[0].sourceUrls;
+    const sourceLink = sourceUrls.find((url) => url.includes(`/${word}`));
     const sourceContainerHTML = `
     <div class="source">
       <span class="source__text">Source</span>
@@ -258,13 +253,12 @@ function handlePlayAudioBtnClick(e) {
   const playAudioBtn = e.target.closest(".play-audio-btn");
   if (!playAudioBtn) return;
 
-  let audioURL;
-  for (let phonetic of phonetics) {
-    if (doesPhoneticAudioMatch(phonetic, language, location)) {
-      audioURL = phonetic.audio;
-      break;
-    }
-  }
+  // Find the phonetic object where the audio matches the user's language and location
+  const phonetic = phonetics.find((phonetic) =>
+    doesPhoneticAudioMatch(phonetic, language, location)
+  );
+
+  const audioURL = phonetic.audio;
 
   // Set the audio source to the URL
   audioElement.src = audioURL;
