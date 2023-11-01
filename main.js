@@ -9,9 +9,6 @@ const resultsContainer = document.querySelector(".results-container");
 const { language, location } = getLanguageAndLocation();
 let data;
 let phonetics;
-let audioElement;
-let synonymsCount = -1;
-let antonymsCount = -1;
 
 // CODE FOR GETTING WORD DEFINITION
 
@@ -37,7 +34,17 @@ function getPhonetic(phonetics) {
     doesPhoneticAudioMatch(phonetic, language, location)
   );
 
-  const phoneticValue = phonetic?.text || "";
+  let phoneticValue = phonetic?.text || "";
+
+  // If there is no audio value, then have the 'phoneticValue' be equal to the 'phonetic' property.
+  if (phoneticValue === "" && data[0].hasOwnProperty("phonetic")) {
+    phoneticValue = data[0].phonetic;
+  }
+
+  // If there is no audio value and there is no 'phonetic' property, have the 'phoneticValue' be equal to the 'text' property's value in the first object of the 'phonetics' array.
+  if (phoneticValue === "" && !data[0].hasOwnProperty("phonetic")) {
+    phoneticValue = phonetics[0].text;
+  }
 
   return phoneticValue;
 }
@@ -49,9 +56,8 @@ function isAudioAvailable(phonetics) {
 }
 
 // EVENT LISTENER CALLBACK FUNCTION
-async function handleFormSubmit(e) {
+async function getWordDefinition(e, word) {
   e.preventDefault();
-  const word = formInput.value;
 
   try {
     const response = await fetch(
@@ -66,6 +72,10 @@ async function handleFormSubmit(e) {
     data = await response.json();
     // Have to remove this console.log
     console.log(data);
+
+    // Initialize 'synonymsCount' and 'antonymsCount' with a value of -1
+    let synonymsCount = -1;
+    let antonymsCount = -1;
 
     // Generate and insert HTML based on the data
     phonetics = data[0].phonetics;
@@ -106,8 +116,6 @@ async function handleFormSubmit(e) {
         "beforeend",
         playAudioBtnHTML
       );
-
-      audioElement = document.querySelector(".pronunciation-audio");
     }
 
     // Insert 'word-meanings' div based on how many meanings there are
@@ -244,7 +252,9 @@ async function handleFormSubmit(e) {
 }
 
 // EVENT LISTENER
-form.addEventListener("submit", handleFormSubmit);
+form.addEventListener("submit", (e) =>
+  getWordDefinition(e, formInput.value.toLowerCase())
+);
 
 // CODE FOR CLICKING ON 'playAudioBtn'
 
@@ -261,6 +271,7 @@ function handlePlayAudioBtnClick(e) {
   const audioURL = phonetic.audio;
 
   // Set the audio source to the URL
+  const audioElement = document.querySelector(".pronunciation-audio");
   audioElement.src = audioURL;
 
   // Load and play the audio
@@ -270,3 +281,31 @@ function handlePlayAudioBtnClick(e) {
 
 // EVENT LISTENER
 resultsContainer.addEventListener("click", handlePlayAudioBtnClick);
+
+// CODE FOR CLICKING ON A SYNONYM OR ANTONYM
+
+// EVENT LISTENER CALLBACK FUNCTION
+async function handleSynonymOrAntonymClick(e) {
+  const target = e.target;
+  if (
+    !target.classList.contains("synonym") &&
+    !target.classList.contains("antonym")
+  )
+    return;
+
+  const term = target.textContent;
+
+  // Get the definition of the term that was clicked
+  await getWordDefinition(e, term);
+
+  // Clear the 'formInput' and scroll to the top of the page
+  formInput.value = "";
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+}
+
+// EVENT LISTENER
+resultsContainer.addEventListener("click", handleSynonymOrAntonymClick);
