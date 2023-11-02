@@ -387,3 +387,7 @@ body {
 .hidden {
   display: none;
 }
+
+.form__input--red {
+  border: 0.1rem solid $color-sunsetOrange;
+}

@@ -323,4 +323,8 @@ body {
 
 .hidden {
   display: none;
+}
+
+.form__input--red {
+  border: 0.1rem solid #ff5252;
 }/*# sourceMappingURL=main.css.map */

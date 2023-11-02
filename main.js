@@ -5,7 +5,9 @@ import "regenerator-runtime/runtime";
 // VARIABLES
 const form = document.querySelector(".form");
 const formInput = document.querySelector(".form__input");
+const formInputError = document.querySelector(".form__input-error");
 const resultsContainer = document.querySelector(".results-container");
+const notFound = document.querySelector(".not-found");
 const { language, location } = getLanguageAndLocation();
 let data;
 let phonetics;
@@ -46,13 +48,41 @@ function getPhonetic(phonetics) {
     phoneticValue = phonetics[0].text;
   }
 
-  return phoneticValue;
+  return phoneticValue === undefined ? "" : phoneticValue;
 }
 
 function isAudioAvailable(phonetics) {
   return phonetics.some((phonetic) =>
     doesPhoneticAudioMatch(phonetic, language, location)
   );
+}
+
+function displayFormInputError() {
+  // Remove focus from 'formInput'
+  formInput.blur();
+
+  // Turn the border of 'formInput' red
+  formInput.classList.add("form__input--red");
+
+  // Display 'form__input-error'
+  formInputError.classList.remove("hidden");
+
+  // Hide 'notFound' div if it is currently being displayed
+  notFound.classList.add("hidden");
+}
+
+function displayNotFoundDiv() {
+  // Remove focus from 'formInput'
+  formInput.blur();
+
+  // Remove 'form__input--red' class from 'formInput' if it is present.
+  formInput.classList.remove("form__input--red");
+
+  // Hide 'formInputError' if it is currently being displayed.
+  formInputError.classList.add("hidden");
+
+  // Display the 'notFound' div
+  notFound.classList.remove("hidden");
 }
 
 // EVENT LISTENER CALLBACK FUNCTION
@@ -65,10 +95,21 @@ async function getWordDefinition(e, word) {
     );
 
     if (!response.ok) {
+      if (word === "") {
+        displayFormInputError();
+        return;
+      }
+
+      // If a word doesn't exist, we will also get an error. In this scenario we want to display the 'not-found' div.
+      displayNotFoundDiv();
+
       throw new Error("Network response was not ok");
-      // Error handling for empty string and not a word goes here:
     }
 
+    // Remove focus from 'formInput'
+    formInput.blur();
+
+    // Retrieve data
     data = await response.json();
     // Have to remove this console.log
     console.log(data);
