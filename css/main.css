@@ -145,6 +145,24 @@ body {
   margin-top: 0.8rem;
 }
 
+.spinner {
+  border: 0.4rem solid rgba(0, 0, 0, 0.3);
+  border-top: 0.4rem solid #a445ed;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  animation: spin 2s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .word-phonetic-audio-container {
   display: flex;
   justify-content: space-between;

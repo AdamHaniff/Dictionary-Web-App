@@ -7,6 +7,7 @@ const form = document.querySelector(".form");
 const formInput = document.querySelector(".form__input");
 const formInputError = document.querySelector(".form__input-error");
 const resultsContainer = document.querySelector(".results-container");
+const loadingSpinner = document.querySelector(".loading-spinner");
 const notFound = document.querySelector(".not-found");
 const { language, location } = getLanguageAndLocation();
 let data;
@@ -57,7 +58,17 @@ function isAudioAvailable(phonetics) {
   );
 }
 
+function hideLoadingSpinner() {
+  loadingSpinner.classList.add("hidden");
+}
+
+function displayLoadingSpinner() {
+  loadingSpinner.classList.remove("hidden");
+}
+
 function displayFormInputError() {
+  hideLoadingSpinner();
+
   // Remove focus from 'formInput'
   formInput.blur();
 
@@ -71,15 +82,24 @@ function displayFormInputError() {
   notFound.classList.add("hidden");
 }
 
-function displayNotFoundDiv() {
-  // Remove focus from 'formInput'
-  formInput.blur();
-
+function hideFormInputError() {
   // Remove 'form__input--red' class from 'formInput' if it is present.
   formInput.classList.remove("form__input--red");
 
   // Hide 'formInputError' if it is currently being displayed.
   formInputError.classList.add("hidden");
+}
+
+function displayNotFoundDiv() {
+  hideLoadingSpinner();
+
+  // Remove focus from 'formInput'
+  formInput.blur();
+
+  hideFormInputError();
+
+  // If there is a definition currenty being displayed, it needs to be removed.
+  resultsContainer.innerHTML = "";
 
   // Display the 'notFound' div
   notFound.classList.remove("hidden");
@@ -90,6 +110,17 @@ async function getWordDefinition(e, word) {
   e.preventDefault();
 
   try {
+    displayLoadingSpinner();
+
+    // Remove definition if it is currently being displayed
+    resultsContainer.innerHTML = "";
+
+    // Hide 'formInputError' if it is currently displayed
+    hideFormInputError();
+
+    // Hide 'notFound' div if it is currently displayed
+    notFound.classList.add("hidden");
+
     const response = await fetch(
       `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
     );
@@ -105,6 +136,9 @@ async function getWordDefinition(e, word) {
 
       throw new Error("Network response was not ok");
     }
+
+    // CODE FOR WHEN WE GET BACK A VALID RESPONSE
+    hideLoadingSpinner();
 
     // Remove focus from 'formInput'
     formInput.blur();

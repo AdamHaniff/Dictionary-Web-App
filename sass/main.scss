@@ -191,6 +191,26 @@ body {
   }
 }
 
+// ********* LOADING-SPINNER *********
+.spinner {
+  border: 0.4rem solid rgba(0, 0, 0, 0.3);
+  border-top: 0.4rem solid $color-jasminePurple;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  animation: spin 2s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 // ** WORD-PHONETIC-AUDIO-CONTAINER **
 .word-phonetic-audio-container {
   display: flex;
