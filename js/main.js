@@ -1,4 +1,4 @@
-import newWindowIcon from "url:./assets/images/icon-new-window.svg";
+import newWindowIcon from "url:../assets/images/icon-new-window.svg";
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 
@@ -112,6 +112,9 @@ async function getWordDefinition(e, word) {
   try {
     displayLoadingSpinner();
 
+    // Remove focus from 'formInput'
+    formInput.blur();
+
     // Remove definition if it is currently being displayed
     resultsContainer.innerHTML = "";
 
@@ -138,19 +141,18 @@ async function getWordDefinition(e, word) {
     }
 
     // CODE FOR WHEN WE GET BACK A VALID RESPONSE
-    hideLoadingSpinner();
-
-    // Remove focus from 'formInput'
-    formInput.blur();
-
-    // Retrieve data
-    data = await response.json();
-    // Have to remove this console.log
-    console.log(data);
 
     // Initialize 'synonymsCount' and 'antonymsCount' with a value of -1
     let synonymsCount = -1;
     let antonymsCount = -1;
+
+    // Retrieve data
+    data = await response.json();
+
+    // Have to remove this console.log
+    console.log(data);
+
+    hideLoadingSpinner();
 
     // Generate and insert HTML based on the data
     phonetics = data[0].phonetics;
