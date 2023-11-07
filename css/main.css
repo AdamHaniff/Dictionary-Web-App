@@ -1,3 +1,9 @@
+:root {
+  --font-inter: Inter, sans-serif;
+  --font-lora: Lora, serif;
+  --font-inconsolata: Inconsolata, monospace;
+}
+
 *,
 *::before,
 *::after {
@@ -64,6 +70,9 @@ body {
   font-size: 1.4rem;
   font-weight: 700;
   line-height: 1.9rem;
+}
+.header__font-style:first-child {
+  font-family: "Inter", sans-serif;
 }
 .header__font-style:nth-child(2) {
   font-family: "Lora", serif;
