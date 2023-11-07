@@ -13,6 +13,7 @@ $color-iridium: #3a3a3a;
 $color-quillGrey: #d4d4d4;
 $color-sunsetOrange: #ff5252;
 $color-silverSand: rgba(45, 45, 45, 0.25);
+$color-davyGrey: rgba(255, 255, 255, 0.25);
 
 // ********** FONT-FAMILIES **********
 $font-inter: "Inter", sans-serif;
@@ -26,7 +27,16 @@ $fw-700: 700;
 // *************** ROOT ***************
 :root {
   // COLORS
-  // ADD IN COLORS HERE
+  --color-white: #{$color-white};
+  --color-black: #{$color-black};
+  --color-thunder: #{$color-thunder};
+  --color-boulder: #{$color-boulder};
+  --color-jasminePurple: #{$color-jasminePurple};
+  --color-whiteSmoke: #{$color-whiteSmoke};
+  --color-darkJungleGreen: #{$color-darkJungleGreen};
+  --color-silverSand: #{$color-silverSand};
+  --color-davyGrey: #{$color-davyGrey};
+
   // FONT-FAMILIES
   --font-inter: #{$font-inter};
   --font-lora: #{$font-lora};
@@ -146,6 +156,7 @@ body {
     height: 100%;
     border-radius: 1rem;
     background: $color-boulder;
+    transition: all 0.3s;
   }
 
   &__toggle-oval {
@@ -155,7 +166,8 @@ body {
     background: $color-white;
     position: absolute;
     top: 0.3rem;
-    left: 0.3rem;
+    transform: translateX(0.3rem);
+    transition: all 0.3s;
   }
 }
 
@@ -424,4 +436,14 @@ body {
 
 .form__input--red {
   border: 0.1rem solid $color-sunsetOrange;
+}
+
+.header__toggle-rectangle--dark {
+  background: $color-jasminePurple;
+  transition: all 0.3s;
+}
+
+.header__toggle-oval--dark {
+  transform: translateX(2.3rem);
+  transition: all 0.3s;
 }
