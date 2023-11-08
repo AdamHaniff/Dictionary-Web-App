@@ -1,4 +1,5 @@
 import newWindowIcon from "url:../assets/images/icon-new-window.svg";
+import isLightTheme from "./color-themes";
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 

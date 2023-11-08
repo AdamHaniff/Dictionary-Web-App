@@ -14,6 +14,7 @@ $color-quillGrey: #d4d4d4;
 $color-sunsetOrange: #ff5252;
 $color-silverSand: rgba(45, 45, 45, 0.25);
 $color-davyGrey: rgba(255, 255, 255, 0.25);
+$color-darkJungleGreen30: rgba(0, 0, 0, 0.3);
 
 // ********** FONT-FAMILIES **********
 $font-inter: "Inter", sans-serif;
@@ -36,6 +37,7 @@ $fw-700: 700;
   --color-darkJungleGreen: #{$color-darkJungleGreen};
   --color-silverSand: #{$color-silverSand};
   --color-davyGrey: #{$color-davyGrey};
+  --color-darkJungleGreen30: #{$color-darkJungleGreen30};
 
   // FONT-FAMILIES
   --font-inter: #{$font-inter};
@@ -184,20 +186,20 @@ body {
     height: 4.8rem;
     border-radius: 1.6rem;
     background: $color-whiteSmoke;
+    color: $color-thunder;
     border: 0.1rem solid transparent;
     padding-left: 2.4rem;
-    color: $color-thunder;
     font-family: inherit;
     font-size: 1.6rem;
     font-weight: $fw-700;
 
+    &::placeholder {
+      color: $color-silverSand;
+    }
+
     &:focus {
       border: 0.1rem solid $color-jasminePurple;
       outline: none;
-    }
-
-    &::placeholder {
-      color: $color-silverSand;
     }
   }
 
@@ -219,7 +221,7 @@ body {
 
 // ********* LOADING-SPINNER *********
 .spinner {
-  border: 0.4rem solid rgba(0, 0, 0, 0.3);
+  border: 0.4rem solid $color-darkJungleGreen30;
   border-top: 0.4rem solid $color-jasminePurple;
   border-radius: 50%;
   width: 2rem;
@@ -438,6 +440,15 @@ body {
   border: 0.1rem solid $color-sunsetOrange;
 }
 
+.form__input--dark {
+  background: $color-darkJungleGreen;
+  color: $color-white;
+}
+
+.form__input--dark::placeholder {
+  color: $color-davyGrey;
+}
+
 .header__toggle-rectangle--dark {
   background: $color-jasminePurple;
   transition: all 0.3s;
@@ -446,4 +457,9 @@ body {
 .header__toggle-oval--dark {
   transform: translateX(2.3rem);
   transition: all 0.3s;
+}
+
+.spinner--dark {
+  border: 0.4rem solid $color-jasminePurple;
+  border-top: 0.4rem solid $color-white;
 }
