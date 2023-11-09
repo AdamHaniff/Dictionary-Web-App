@@ -160,7 +160,9 @@ async function getWordDefinition(e, word) {
     resultsContainer.innerHTML = `
     <div class="word-phonetic-audio-container">
       <div class="word-phonetic-container">
-        <span class="word">${data[0].word}</span>
+        <span class="word ${isLightTheme ? "" : "word--dark"}">${
+      data[0].word
+    }</span>
         <span class="phonetic">${getPhonetic(phonetics)}</span>
       </div>
     </div>`;

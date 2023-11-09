@@ -3,15 +3,6 @@ const headerFontContainer = document.querySelector(".header__font-container");
 const headerFontStyles = document.querySelector(".header__font-styles");
 const headerFont = document.querySelector(".header__font");
 const bodyElement = document.body;
-const fontInter = getComputedStyle(document.documentElement).getPropertyValue(
-  "--font-inter"
-);
-const fontLora = getComputedStyle(document.documentElement).getPropertyValue(
-  "--font-lora"
-);
-const fontInconsolata = getComputedStyle(
-  document.documentElement
-).getPropertyValue("--font-inconsolata");
 
 // FUNCTIONS
 function hideHeaderFontStyles() {
@@ -44,13 +35,20 @@ function handleHeaderFontStylesClick(e) {
 
     hideHeaderFontStyles();
 
+    // Remove all existing font classes
+    bodyElement.classList.remove(
+      "body--font-inter",
+      "body--font-lora",
+      "body--font-inconsolata"
+    );
+
     // Change body element's 'font-family' value to the font style that was clicked
     if (fontStyle === "Sans Serif") {
-      bodyElement.style.fontFamily = fontInter;
+      bodyElement.classList.add("body--font-inter");
     } else if (fontStyle === "Serif") {
-      bodyElement.style.fontFamily = fontLora;
+      bodyElement.classList.add("body--font-lora");
     } else if (fontStyle === "Mono") {
-      bodyElement.style.fontFamily = fontInconsolata;
+      bodyElement.classList.add("body--font-inconsolata");
     }
 
     // Stop the click event from propagating to the parent container

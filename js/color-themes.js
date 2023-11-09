@@ -11,52 +11,20 @@ const headerToggleRectangle = document.querySelector(
 const headerMoonIconPath = document.querySelector(".header__moon-icon-path");
 const formInput = document.querySelector(".form__input");
 const spinner = document.querySelector(".spinner");
-const word = document.querySelector(".word");
-
-const colorWhite = getComputedStyle(document.documentElement).getPropertyValue(
-  "--color-white"
-);
-const colorBlack = getComputedStyle(document.documentElement).getPropertyValue(
-  "--color-black"
-);
-const colorThunder = getComputedStyle(
-  document.documentElement
-).getPropertyValue("--color-thunder");
-const colorBoulder = getComputedStyle(
-  document.documentElement
-).getPropertyValue("--color-boulder");
-const colorJasminePurple = getComputedStyle(
-  document.documentElement
-).getPropertyValue("--color-jasminePurple");
-const colorWhiteSmoke = getComputedStyle(
-  document.documentElement
-).getPropertyValue("--color-whiteSmoke");
-const colorDarkJungleGreen = getComputedStyle(
-  document.documentElement
-).getPropertyValue("--color-darkJungleGreen");
-const colorSilverSand = getComputedStyle(
-  document.documentElement
-).getPropertyValue("--color-silverSand");
-const colorDavyGrey = getComputedStyle(
-  document.documentElement
-).getPropertyValue("--color-davyGrey");
-const colorDarkJungleGreen30 = getComputedStyle(
-  document.documentElement
-).getPropertyValue("--color-darkJungleGreen30");
 
 // FUNCTIONS
 function switchToLightTheme() {
-  bodyElement.style.background = colorWhite;
-  headerFont.style.color = colorThunder;
-  headerMoonIconPath.style.stroke = colorBoulder;
+  bodyElement.classList.toggle("body--dark");
+  headerFont.classList.toggle("header__font--dark");
+  headerMoonIconPath.classList.toggle("header__moon-icon-path--dark");
   formInput.classList.toggle("form__input--dark");
   spinner.classList.toggle("spinner--dark");
 }
 
 function switchToDarkTheme() {
-  bodyElement.style.background = colorBlack;
-  headerFont.style.color = colorWhite;
-  headerMoonIconPath.style.stroke = colorJasminePurple;
+  bodyElement.classList.toggle("body--dark");
+  headerFont.classList.toggle("header__font--dark");
+  headerMoonIconPath.classList.toggle("header__moon-icon-path--dark");
   formInput.classList.toggle("form__input--dark");
   spinner.classList.toggle("spinner--dark");
 }

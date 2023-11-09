@@ -25,26 +25,6 @@ $font-inconsolata: "Inconsolata", monospace;
 $fw-400: 400;
 $fw-700: 700;
 
-// *************** ROOT ***************
-:root {
-  // COLORS
-  --color-white: #{$color-white};
-  --color-black: #{$color-black};
-  --color-thunder: #{$color-thunder};
-  --color-boulder: #{$color-boulder};
-  --color-jasminePurple: #{$color-jasminePurple};
-  --color-whiteSmoke: #{$color-whiteSmoke};
-  --color-darkJungleGreen: #{$color-darkJungleGreen};
-  --color-silverSand: #{$color-silverSand};
-  --color-davyGrey: #{$color-davyGrey};
-  --color-darkJungleGreen30: #{$color-darkJungleGreen30};
-
-  // FONT-FAMILIES
-  --font-inter: #{$font-inter};
-  --font-lora: #{$font-lora};
-  --font-inconsolata: #{$font-inconsolata};
-}
-
 // ************** BASE ***************
 *,
 *::before,
@@ -59,7 +39,7 @@ html {
   font-size: 62.5%;
 }
 
-body {
+.body {
   background: $color-white;
   font-family: $font-inter;
   padding: 2.4rem 2.4rem 0;
@@ -436,6 +416,43 @@ body {
   display: none;
 }
 
+// ************** BODY **************
+.body--font-inter {
+  font-family: $font-inter;
+}
+
+.body--font-lora {
+  font-family: $font-lora;
+}
+
+.body--font-inconsolata {
+  font-family: $font-inconsolata;
+}
+
+.body--dark {
+  background: $color-black;
+}
+
+// ************* HEADER *************
+.header__font--dark {
+  color: $color-white;
+}
+
+.header__moon-icon-path--dark {
+  stroke: $color-jasminePurple;
+}
+
+.header__toggle-rectangle--dark {
+  background: $color-jasminePurple;
+  transition: all 0.3s;
+}
+
+.header__toggle-oval--dark {
+  transform: translateX(2.3rem);
+  transition: all 0.3s;
+}
+
+// ************** FORM **************
 .form__input--red {
   border: 0.1rem solid $color-sunsetOrange;
 }
@@ -449,17 +466,13 @@ body {
   color: $color-davyGrey;
 }
 
-.header__toggle-rectangle--dark {
-  background: $color-jasminePurple;
-  transition: all 0.3s;
-}
-
-.header__toggle-oval--dark {
-  transform: translateX(2.3rem);
-  transition: all 0.3s;
-}
-
+// ************* SPINNER ************
 .spinner--dark {
   border: 0.4rem solid $color-jasminePurple;
   border-top: 0.4rem solid $color-white;
+}
+
+// * WORD-PHONETIC-AUDIO-CONTAINER *
+.word--dark {
+  color: $color-white;
 }

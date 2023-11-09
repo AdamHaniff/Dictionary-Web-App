@@ -1,19 +1,3 @@
-:root {
-  --color-white: #fff;
-  --color-black: #050505;
-  --color-thunder: #2d2d2d;
-  --color-boulder: #757575;
-  --color-jasminePurple: #a445ed;
-  --color-whiteSmoke: #f4f4f4;
-  --color-darkJungleGreen: #1f1f1f;
-  --color-silverSand: rgba(45, 45, 45, 0.25);
-  --color-davyGrey: rgba(255, 255, 255, 0.25);
-  --color-darkJungleGreen30: rgba(0, 0, 0, 0.3);
-  --font-inter: Inter, sans-serif;
-  --font-lora: Lora, serif;
-  --font-inconsolata: Inconsolata, monospace;
-}
-
 *,
 *::before,
 *::after {
@@ -27,7 +11,7 @@ html {
   font-size: 62.5%;
 }
 
-body {
+.body {
   background: #fff;
   font-family: "Inter", sans-serif;
   padding: 2.4rem 2.4rem 0;
@@ -364,6 +348,40 @@ body {
   display: none;
 }
 
+.body--font-inter {
+  font-family: "Inter", sans-serif;
+}
+
+.body--font-lora {
+  font-family: "Lora", serif;
+}
+
+.body--font-inconsolata {
+  font-family: "Inconsolata", monospace;
+}
+
+.body--dark {
+  background: #050505;
+}
+
+.header__font--dark {
+  color: #fff;
+}
+
+.header__moon-icon-path--dark {
+  stroke: #a445ed;
+}
+
+.header__toggle-rectangle--dark {
+  background: #a445ed;
+  transition: all 0.3s;
+}
+
+.header__toggle-oval--dark {
+  transform: translateX(2.3rem);
+  transition: all 0.3s;
+}
+
 .form__input--red {
   border: 0.1rem solid #ff5252;
 }
@@ -381,17 +399,11 @@ body {
   color: rgba(255, 255, 255, 0.25);
 }
 
-.header__toggle-rectangle--dark {
-  background: #a445ed;
-  transition: all 0.3s;
-}
-
-.header__toggle-oval--dark {
-  transform: translateX(2.3rem);
-  transition: all 0.3s;
-}
-
 .spinner--dark {
   border: 0.4rem solid #a445ed;
   border-top: 0.4rem solid #fff;
+}
+
+.word--dark {
+  color: #fff;
 }/*# sourceMappingURL=main.css.map */
