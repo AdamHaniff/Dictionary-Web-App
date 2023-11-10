@@ -1,6 +1,5 @@
 // VARIABLES
-let isLightTheme = true;
-
+const colorTheme = { isLightTheme: true };
 const bodyElement = document.body;
 const headerFont = document.querySelector(".header__font");
 const headerToggleBtn = document.querySelector(".header__toggle-btn");
@@ -11,14 +10,43 @@ const headerToggleRectangle = document.querySelector(
 const headerMoonIconPath = document.querySelector(".header__moon-icon-path");
 const formInput = document.querySelector(".form__input");
 const spinner = document.querySelector(".spinner");
+let word;
+let partOfSpeech;
+let horizontalLine;
 
 // FUNCTIONS
+function changeWordColor() {
+  word = document.querySelector(".word");
+  if (word) word.classList.toggle("word--dark");
+}
+
+function changePartOfSpeechColor() {
+  partOfSpeech = document.querySelectorAll(".part-of-speech");
+  if (partOfSpeech) {
+    for (let el of partOfSpeech) {
+      el.classList.toggle("part-of-speech--dark");
+    }
+  }
+}
+
+function changeHorizontalLineColor() {
+  horizontalLine = document.querySelectorAll(".horizontal-line");
+  if (horizontalLine) {
+    for (let el of horizontalLine) {
+      el.classList.toggle("horizontal-line--dark");
+    }
+  }
+}
+
 function switchToLightTheme() {
   bodyElement.classList.toggle("body--dark");
   headerFont.classList.toggle("header__font--dark");
   headerMoonIconPath.classList.toggle("header__moon-icon-path--dark");
   formInput.classList.toggle("form__input--dark");
   spinner.classList.toggle("spinner--dark");
+  changeWordColor();
+  changePartOfSpeechColor();
+  changeHorizontalLineColor();
 }
 
 function switchToDarkTheme() {
@@ -27,10 +55,13 @@ function switchToDarkTheme() {
   headerMoonIconPath.classList.toggle("header__moon-icon-path--dark");
   formInput.classList.toggle("form__input--dark");
   spinner.classList.toggle("spinner--dark");
+  changeWordColor();
+  changePartOfSpeechColor();
+  changeHorizontalLineColor();
 }
 
-// EVENT LISTENER
-headerToggleBtn.addEventListener("click", function (e) {
+// EVENT LISTENER CALLBACK FUNCTION
+function handleHeaderToggleBtnClick(e) {
   const headerToggleBtn = e.target.closest(".header__toggle-btn");
   if (!headerToggleBtn) return;
 
@@ -38,13 +69,16 @@ headerToggleBtn.addEventListener("click", function (e) {
   headerToggleRectangle.classList.toggle("header__toggle-rectangle--dark");
   headerToggleOval.classList.toggle("header__toggle-oval--dark");
 
-  if (isLightTheme) {
-    isLightTheme = false;
+  if (colorTheme.isLightTheme) {
+    colorTheme.isLightTheme = false;
     switchToDarkTheme();
   } else {
-    isLightTheme = true;
+    colorTheme.isLightTheme = true;
     switchToLightTheme();
   }
-});
+}
 
-export default isLightTheme;
+// EVENT LISTENER
+headerToggleBtn.addEventListener("click", handleHeaderToggleBtnClick);
+
+export default colorTheme;

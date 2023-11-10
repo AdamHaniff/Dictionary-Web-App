@@ -406,4 +406,12 @@ html {
 
 .word--dark {
   color: #fff;
+}
+
+.part-of-speech--dark {
+  color: #fff;
+}
+
+.horizontal-line--dark {
+  border: 0.1rem solid #3a3a3a;
 }/*# sourceMappingURL=main.css.map */

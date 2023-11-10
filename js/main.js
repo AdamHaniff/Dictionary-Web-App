@@ -1,5 +1,5 @@
 import newWindowIcon from "url:../assets/images/icon-new-window.svg";
-import isLightTheme from "./color-themes";
+import colorTheme from "./color-themes";
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 
@@ -160,7 +160,7 @@ async function getWordDefinition(e, word) {
     resultsContainer.innerHTML = `
     <div class="word-phonetic-audio-container">
       <div class="word-phonetic-container">
-        <span class="word ${isLightTheme ? "" : "word--dark"}">${
+        <span class="word ${colorTheme.isLightTheme ? "" : "word--dark"}">${
       data[0].word
     }</span>
         <span class="phonetic">${getPhonetic(phonetics)}</span>
@@ -205,8 +205,12 @@ async function getWordDefinition(e, word) {
       const wordMeaningsHTML = `
       <div class="word-meanings">
         <div class="part-of-speech-line-container">
-          <span class="part-of-speech">${meanings[i].partOfSpeech}</span>
-          <hr class="horizontal-line" />
+          <span class="part-of-speech ${
+            colorTheme.isLightTheme ? "" : "part-of-speech--dark"
+          }">${meanings[i].partOfSpeech}</span>
+          <hr class="horizontal-line ${
+            colorTheme.isLightTheme ? "" : "horizontal-line--dark"
+          }"/>
         </div>
         <span class="meaning-text">Meaning</span>
         <div class="meanings"></div>
