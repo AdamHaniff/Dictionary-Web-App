@@ -15,6 +15,7 @@ $color-sunsetOrange: #ff5252;
 $color-silverSand: rgba(45, 45, 45, 0.25);
 $color-davyGrey: rgba(255, 255, 255, 0.25);
 $color-darkJungleGreen30: rgba(0, 0, 0, 0.3);
+$color-heavyMetal: #2f2f2f;
 
 // ********** FONT-FAMILIES **********
 $font-inter: "Inter", sans-serif;
@@ -484,4 +485,23 @@ html {
 
 .horizontal-line--dark {
   border: 0.1rem solid $color-iridium;
+}
+
+.word-meaning--dark {
+  color: $color-white;
+}
+
+// ************* SOURCE **************
+.source--dark {
+  border-top: 0.1rem solid $color-iridium;
+}
+
+.source__link--dark {
+  color: $color-white;
+  border-bottom: 0.1rem solid $color-heavyMetal;
+}
+
+// ************ NOT FOUND ************
+.not-found__text--dark {
+  color: $color-white;
 }

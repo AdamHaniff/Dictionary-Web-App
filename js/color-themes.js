@@ -13,6 +13,10 @@ const spinner = document.querySelector(".spinner");
 let word;
 let partOfSpeech;
 let horizontalLine;
+let wordMeaning;
+let source;
+let sourceLink;
+const notFoundText = document.querySelector(".not-found__text");
 
 // FUNCTIONS
 function changeWordColor() {
@@ -38,6 +42,25 @@ function changeHorizontalLineColor() {
   }
 }
 
+function changeWordMeaningColor() {
+  wordMeaning = document.querySelectorAll(".word-meaning");
+  if (wordMeaning) {
+    for (let el of wordMeaning) {
+      el.classList.toggle("word-meaning--dark");
+    }
+  }
+}
+
+function changeSourceBorderTopColor() {
+  source = document.querySelector(".source");
+  if (source) source.classList.toggle("source--dark");
+}
+
+function changeSourceLinkColor() {
+  sourceLink = document.querySelector(".source__link");
+  if (sourceLink) sourceLink.classList.toggle("source__link--dark");
+}
+
 function switchToLightTheme() {
   bodyElement.classList.toggle("body--dark");
   headerFont.classList.toggle("header__font--dark");
@@ -47,6 +70,10 @@ function switchToLightTheme() {
   changeWordColor();
   changePartOfSpeechColor();
   changeHorizontalLineColor();
+  changeWordMeaningColor();
+  changeSourceBorderTopColor();
+  changeSourceLinkColor();
+  notFoundText.classList.toggle("not-found__text--dark");
 }
 
 function switchToDarkTheme() {
@@ -58,6 +85,10 @@ function switchToDarkTheme() {
   changeWordColor();
   changePartOfSpeechColor();
   changeHorizontalLineColor();
+  changeWordMeaningColor();
+  changeSourceBorderTopColor();
+  changeSourceLinkColor();
+  notFoundText.classList.toggle("not-found__text--dark");
 }
 
 // EVENT LISTENER CALLBACK FUNCTION

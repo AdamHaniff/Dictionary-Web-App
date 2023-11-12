@@ -414,4 +414,21 @@ html {
 
 .horizontal-line--dark {
   border: 0.1rem solid #3a3a3a;
+}
+
+.word-meaning--dark {
+  color: #fff;
+}
+
+.source--dark {
+  border-top: 0.1rem solid #3a3a3a;
+}
+
+.source__link--dark {
+  color: #fff;
+  border-bottom: 0.1rem solid #2f2f2f;
+}
+
+.not-found__text--dark {
+  color: #fff;
 }/*# sourceMappingURL=main.css.map */

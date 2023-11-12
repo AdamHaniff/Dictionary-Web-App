@@ -234,7 +234,9 @@ async function getWordDefinition(e, word) {
             <circle cx="2.5" cy="2.5" r="2.5" fill="#8F19E8" />
           </svg>
           <div class="word-meaning-example">
-            <p class="word-meaning">
+            <p class="word-meaning ${
+              colorTheme.isLightTheme ? "" : "word-meaning--dark"
+            }">
              ${definition.definition}
             </p>
             ${
@@ -306,11 +308,13 @@ async function getWordDefinition(e, word) {
     const sourceUrls = data[0].sourceUrls;
     const sourceLink = sourceUrls.find((url) => url.includes(`/${word}`));
     const sourceContainerHTML = `
-    <div class="source">
+    <div class="source ${colorTheme.isLightTheme ? "" : "source--dark"}">
       <span class="source__text">Source</span>
       <div class="source__link-window">
         <a
-          class="source__link"
+          class="source__link ${
+            colorTheme.isLightTheme ? "" : "source__link--dark"
+          }"
           href="${sourceLink}"
           target="_blank"
           >${sourceLink}</a
