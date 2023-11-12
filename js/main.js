@@ -110,6 +110,11 @@ function displayNotFoundDiv() {
 async function getWordDefinition(e, word) {
   e.preventDefault();
 
+  if (word === "") {
+    displayFormInputError();
+    return;
+  }
+
   try {
     displayLoadingSpinner();
 
@@ -130,12 +135,7 @@ async function getWordDefinition(e, word) {
     );
 
     if (!response.ok) {
-      if (word === "") {
-        displayFormInputError();
-        return;
-      }
-
-      // If a word doesn't exist, we will also get an error. In this scenario we want to display the 'not-found' div.
+      // If a word doesn't exist, we will get an error. In this scenario we want to display the 'not-found' div.
       displayNotFoundDiv();
 
       throw new Error("Network response was not ok");

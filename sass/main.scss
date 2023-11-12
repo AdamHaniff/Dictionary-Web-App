@@ -453,6 +453,15 @@ html {
   transition: all 0.3s;
 }
 
+.header__font-styles--dark {
+  background: $color-darkJungleGreen;
+  box-shadow: 0 0.5rem 3rem 0 $color-jasminePurple;
+}
+
+.header__font-style--dark {
+  color: $color-white;
+}
+
 // ************** FORM **************
 .form__input--red {
   border: 0.1rem solid $color-sunsetOrange;

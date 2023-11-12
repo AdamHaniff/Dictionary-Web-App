@@ -17,6 +17,8 @@ let wordMeaning;
 let source;
 let sourceLink;
 const notFoundText = document.querySelector(".not-found__text");
+const headerFontStyles = document.querySelector(".header__font-styles");
+const headerFontStyle = document.querySelectorAll(".header__font-style");
 
 // FUNCTIONS
 function changeWordColor() {
@@ -61,6 +63,12 @@ function changeSourceLinkColor() {
   if (sourceLink) sourceLink.classList.toggle("source__link--dark");
 }
 
+function changeHeaderFontStyleColor() {
+  for (let el of headerFontStyle) {
+    el.classList.toggle("header__font-style--dark");
+  }
+}
+
 function switchToLightTheme() {
   bodyElement.classList.toggle("body--dark");
   headerFont.classList.toggle("header__font--dark");
@@ -74,6 +82,8 @@ function switchToLightTheme() {
   changeSourceBorderTopColor();
   changeSourceLinkColor();
   notFoundText.classList.toggle("not-found__text--dark");
+  headerFontStyles.classList.toggle("header__font-styles--dark");
+  changeHeaderFontStyleColor();
 }
 
 function switchToDarkTheme() {
@@ -89,6 +99,8 @@ function switchToDarkTheme() {
   changeSourceBorderTopColor();
   changeSourceLinkColor();
   notFoundText.classList.toggle("not-found__text--dark");
+  headerFontStyles.classList.toggle("header__font-styles--dark");
+  changeHeaderFontStyleColor();
 }
 
 // EVENT LISTENER CALLBACK FUNCTION

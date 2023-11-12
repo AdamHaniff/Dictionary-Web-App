@@ -382,6 +382,15 @@ html {
   transition: all 0.3s;
 }
 
+.header__font-styles--dark {
+  background: #1f1f1f;
+  box-shadow: 0 0.5rem 3rem 0 #a445ed;
+}
+
+.header__font-style--dark {
+  color: #fff;
+}
+
 .form__input--red {
   border: 0.1rem solid #ff5252;
 }
