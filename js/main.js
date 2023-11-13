@@ -24,71 +24,39 @@ const notFound = document.querySelector(".not-found");
 const { language, location } = getLanguageAndLocation();
 let data;
 let phonetics;
+let meanings;
+let synonymsCount = -1;
+let antonymsCount = -1;
 
-// EVENT LISTENER CALLBACK FUNCTION
-async function getWordDefinition(e, word) {
-  e.preventDefault();
+// FUNCTIONS
+function resetFormState() {
+  displayLoadingSpinner(loadingSpinner);
 
-  // If the user submits a blank form, display the 'formInputError' element.
-  if (word === "") {
-    displayFormInputError(loadingSpinner, formInput, formInputError, notFound);
-    return;
-  }
+  // Remove focus from 'formInput'
+  formInput.blur();
 
-  try {
-    displayLoadingSpinner(loadingSpinner);
+  // Remove definition if it is currently being displayed
+  resultsContainer.innerHTML = "";
 
-    // Remove focus from 'formInput'
-    formInput.blur();
+  // Hide 'formInputError' if it is currently displayed
+  hideFormInputError(formInput, formInputError);
 
-    // Remove definition if it is currently being displayed
-    resultsContainer.innerHTML = "";
+  // Hide 'notFound' div if it is currently displayed
+  notFound.classList.add("hidden");
 
-    // Hide 'formInputError' if it is currently displayed
-    hideFormInputError(formInput, formInputError);
+  // Reset 'synonymsCount' and 'antonymsCount' back to -1
+  synonymsCount = -1;
+  antonymsCount = -1;
+}
 
-    // Hide 'notFound' div if it is currently displayed
-    notFound.classList.add("hidden");
-
-    const response = await fetch(
-      `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
-    );
-
-    if (!response.ok) {
-      // If a word doesn't exist, we will get an error. In this scenario we want to display the 'not-found' div.
-      displayNotFoundDiv(
-        loadingSpinner,
-        formInput,
-        formInputError,
-        resultsContainer,
-        notFound
-      );
-
-      throw new Error("Network response was not ok");
-    }
-
-    // CODE FOR WHEN WE GET BACK A VALID RESPONSE
-
-    // Initialize 'synonymsCount' and 'antonymsCount' with a value of -1
-    let synonymsCount = -1;
-    let antonymsCount = -1;
-
-    // Retrieve data
-    data = await response.json();
-
-    // Have to remove this console.log
-    console.log(data);
-
-    hideLoadingSpinner(loadingSpinner);
-
-    // Generate and insert HTML based on the data
-    phonetics = data[0].phonetics;
-    resultsContainer.innerHTML = `
+function insertWordPhoneticAudioContainer() {
+  phonetics = data[0].phonetics;
+  resultsContainer.innerHTML = `
     <div class="word-phonetic-audio-container">
       <div class="word-phonetic-container">
         <span class="word ${colorTheme.isLightTheme ? "" : "word--dark"}">${
-      data[0].word
-    }</span>
+    data[0].word
+  }</span>
         <span class="phonetic">${getPhonetic(
           phonetics,
           language,
@@ -96,9 +64,10 @@ async function getWordDefinition(e, word) {
         )}</span>
       </div>
     </div>`;
+}
 
-    // Check if audio pronunciation is available
-    const playAudioBtnHTML = `
+function insertPlayAudioBtn() {
+  const playAudioBtnHTML = `
       <button class="play-audio-btn">
         <svg
           class="play-audio-icon"
@@ -117,27 +86,25 @@ async function getWordDefinition(e, word) {
         </audio>
       </button>`;
 
-    if (isAudioAvailable(phonetics, language, location)) {
-      const wordPhoneticAudioContainer = document.querySelector(
-        ".word-phonetic-audio-container"
-      );
+  if (isAudioAvailable(phonetics, language, location)) {
+    const wordPhoneticAudioContainer = document.querySelector(
+      ".word-phonetic-audio-container"
+    );
 
-      wordPhoneticAudioContainer.insertAdjacentHTML(
-        "beforeend",
-        playAudioBtnHTML
-      );
-    }
+    wordPhoneticAudioContainer.insertAdjacentHTML(
+      "beforeend",
+      playAudioBtnHTML
+    );
+  }
+}
 
-    // Insert 'word-meanings' div based on how many meanings there are
-    const meanings = data[0].meanings;
-
-    for (let i = 0; i < meanings.length; i++) {
-      const wordMeaningsHTML = `
+function insertWordMeaningsDiv(meanings, index) {
+  const wordMeaningsHTML = `
       <div class="word-meanings">
         <div class="part-of-speech-line-container">
           <span class="part-of-speech ${
             colorTheme.isLightTheme ? "" : "part-of-speech--dark"
-          }">${meanings[i].partOfSpeech}</span>
+          }">${meanings[index].partOfSpeech}</span>
           <hr class="horizontal-line ${
             colorTheme.isLightTheme ? "" : "horizontal-line--dark"
           }"/>
@@ -146,12 +113,13 @@ async function getWordDefinition(e, word) {
         <div class="meanings"></div>
       </div>`;
 
-      resultsContainer.insertAdjacentHTML("beforeend", wordMeaningsHTML);
+  resultsContainer.insertAdjacentHTML("beforeend", wordMeaningsHTML);
+}
 
-      // Insert each definition into the "meanings" div
-      const definitions = meanings[i].definitions;
-      for (let definition of definitions) {
-        const bulletMeaningContainerHTML = `
+function insertDefinitions(meanings, index) {
+  const definitions = meanings[index].definitions;
+  for (let definition of definitions) {
+    const bulletMeaningContainerHTML = `
         <div class="bullet-meaning-container">
           <svg
             class="bullet-point"
@@ -177,35 +145,90 @@ async function getWordDefinition(e, word) {
           </div>
         </div>`;
 
-        const meaningsDiv = document.querySelectorAll(".meanings")[i];
-        meaningsDiv.insertAdjacentHTML("beforeend", bulletMeaningContainerHTML);
-      }
+    const meaningsDiv = document.querySelectorAll(".meanings")[index];
+    meaningsDiv.insertAdjacentHTML("beforeend", bulletMeaningContainerHTML);
+  }
+}
 
-      // Insert 'synonyms-container' if synonyms exist
-      const synonyms = meanings[i].synonyms;
+function insertSynonyms(meanings, index) {
+  const synonyms = meanings[index].synonyms;
 
-      if (synonyms.length > 0) {
-        synonymsCount++;
-        const synonymsContainerHTML = `
+  if (synonyms.length > 0) {
+    synonymsCount++;
+    const synonymsContainerHTML = `
         <div class="synonyms-container">
           <span class="synonyms-text">Synonyms</span>
           <div class="synonyms"></div>
         </div>`;
 
-        const wordMeaningsDiv = document.querySelectorAll(".word-meanings")[i];
-        wordMeaningsDiv.insertAdjacentHTML("beforeend", synonymsContainerHTML);
+    const wordMeaningsDiv = document.querySelectorAll(".word-meanings")[index];
+    wordMeaningsDiv.insertAdjacentHTML("beforeend", synonymsContainerHTML);
 
-        // Loop over the 'synonyms' array and add each synonym to the 'synonyms' div
-        const synonymsDiv =
-          document.querySelectorAll(".synonyms")[synonymsCount];
-        for (let synonym of synonyms) {
-          const synonymHTML = `
+    // Loop over the 'synonyms' array and add each synonym to the 'synonyms' div
+    const synonymsDiv = document.querySelectorAll(".synonyms")[synonymsCount];
+    for (let synonym of synonyms) {
+      const synonymHTML = `
           <span class="synonym">${synonym}</span>
           `;
 
-          synonymsDiv.insertAdjacentHTML("beforeend", synonymHTML);
-        }
-      }
+      synonymsDiv.insertAdjacentHTML("beforeend", synonymHTML);
+    }
+  }
+}
+
+// EVENT LISTENER CALLBACK FUNCTION
+async function getWordDefinition(e, word) {
+  e.preventDefault();
+
+  // If the user submits a blank form, display the 'formInputError' element.
+  if (word === "") {
+    displayFormInputError(loadingSpinner, formInput, formInputError, notFound);
+    return;
+  }
+
+  try {
+    resetFormState();
+
+    // Fetch response from API
+    const response = await fetch(
+      `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+    );
+
+    if (!response.ok) {
+      // If a word doesn't exist, we will get an error. In this scenario we want to display the 'not-found' div.
+      displayNotFoundDiv(
+        loadingSpinner,
+        formInput,
+        formInputError,
+        resultsContainer,
+        notFound
+      );
+
+      throw new Error("Network response was not ok");
+    }
+
+    // CODE FOR WHEN WE GET BACK A VALID RESPONSE
+
+    // Retrieve data and hide the 'loadingSpinner'
+    data = await response.json();
+    hideLoadingSpinner(loadingSpinner);
+
+    // Generate and insert HTML based on the data
+    insertWordPhoneticAudioContainer();
+
+    // Insert HTML for the 'playAudioBtn' if the audio pronunciation is available.
+    insertPlayAudioBtn();
+
+    // Insert 'word-meanings' div based on how many meanings there are.
+    meanings = data[0].meanings;
+
+    for (let i = 0; i < meanings.length; i++) {
+      // Insert "word-meanings" div and insert each definition into the "meanings" div
+      insertWordMeaningsDiv(meanings, i);
+      insertDefinitions(meanings, i);
+
+      // Insert 'synonyms-container' if synonyms exist
+      insertSynonyms(meanings, i);
 
       // Insert 'antonyms-container' if antonyms exist
       const antonyms = meanings[i].antonyms;
