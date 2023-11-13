@@ -1,3 +1,14 @@
+import {
+  getLanguageAndLocation,
+  doesPhoneticAudioMatch,
+  getPhonetic,
+  isAudioAvailable,
+  hideLoadingSpinner,
+  displayLoadingSpinner,
+  displayFormInputError,
+  hideFormInputError,
+  displayNotFoundDiv,
+} from "./helpers";
 import newWindowIcon from "url:../assets/images/icon-new-window.svg";
 import colorTheme from "./color-themes";
 import "core-js/stable";
@@ -14,109 +25,18 @@ const { language, location } = getLanguageAndLocation();
 let data;
 let phonetics;
 
-// CODE FOR GETTING WORD DEFINITION
-
-// HELPER FUNCTIONS
-function getLanguageAndLocation() {
-  const preferredLanguage = navigator.language;
-  const [language, location] = preferredLanguage.split("-");
-  return { language, location };
-}
-
-function doesPhoneticAudioMatch(phonetic, language, location) {
-  const languageSubstring = `/${language}/`;
-  const locationSubstring = `-${location.toLowerCase()}`;
-
-  return (
-    phonetic.audio.includes(languageSubstring) &&
-    phonetic.audio.includes(locationSubstring)
-  );
-}
-
-function getPhonetic(phonetics) {
-  const phonetic = phonetics.find((phonetic) =>
-    doesPhoneticAudioMatch(phonetic, language, location)
-  );
-
-  let phoneticValue = phonetic?.text || "";
-
-  // If there is no audio value, then have the 'phoneticValue' be equal to the 'phonetic' property.
-  if (phoneticValue === "" && data[0].hasOwnProperty("phonetic")) {
-    phoneticValue = data[0].phonetic;
-  }
-
-  // If there is no audio value and there is no 'phonetic' property, have the 'phoneticValue' be equal to the 'text' property's value in the first object of the 'phonetics' array.
-  if (phoneticValue === "" && !data[0].hasOwnProperty("phonetic")) {
-    phoneticValue = phonetics[0].text;
-  }
-
-  return phoneticValue === undefined ? "" : phoneticValue;
-}
-
-function isAudioAvailable(phonetics) {
-  return phonetics.some((phonetic) =>
-    doesPhoneticAudioMatch(phonetic, language, location)
-  );
-}
-
-function hideLoadingSpinner() {
-  loadingSpinner.classList.add("hidden");
-}
-
-function displayLoadingSpinner() {
-  loadingSpinner.classList.remove("hidden");
-}
-
-function displayFormInputError() {
-  hideLoadingSpinner();
-
-  // Remove focus from 'formInput'
-  formInput.blur();
-
-  // Turn the border of 'formInput' red
-  formInput.classList.add("form__input--red");
-
-  // Display 'form__input-error'
-  formInputError.classList.remove("hidden");
-
-  // Hide 'notFound' div if it is currently being displayed
-  notFound.classList.add("hidden");
-}
-
-function hideFormInputError() {
-  // Remove 'form__input--red' class from 'formInput' if it is present.
-  formInput.classList.remove("form__input--red");
-
-  // Hide 'formInputError' if it is currently being displayed.
-  formInputError.classList.add("hidden");
-}
-
-function displayNotFoundDiv() {
-  hideLoadingSpinner();
-
-  // Remove focus from 'formInput'
-  formInput.blur();
-
-  hideFormInputError();
-
-  // If there is a definition currenty being displayed, it needs to be removed.
-  resultsContainer.innerHTML = "";
-
-  // Display the 'notFound' div
-  notFound.classList.remove("hidden");
-}
-
 // EVENT LISTENER CALLBACK FUNCTION
 async function getWordDefinition(e, word) {
   e.preventDefault();
 
+  // If the user submits a blank form, display the 'formInputError' element.
   if (word === "") {
-    displayFormInputError();
+    displayFormInputError(loadingSpinner, formInput, formInputError, notFound);
     return;
   }
 
   try {
-    displayLoadingSpinner();
+    displayLoadingSpinner(loadingSpinner);
 
     // Remove focus from 'formInput'
     formInput.blur();
@@ -125,7 +45,7 @@ async function getWordDefinition(e, word) {
     resultsContainer.innerHTML = "";
 
     // Hide 'formInputError' if it is currently displayed
-    hideFormInputError();
+    hideFormInputError(formInput, formInputError);
 
     // Hide 'notFound' div if it is currently displayed
     notFound.classList.add("hidden");
@@ -136,7 +56,13 @@ async function getWordDefinition(e, word) {
 
     if (!response.ok) {
       // If a word doesn't exist, we will get an error. In this scenario we want to display the 'not-found' div.
-      displayNotFoundDiv();
+      displayNotFoundDiv(
+        loadingSpinner,
+        formInput,
+        formInputError,
+        resultsContainer,
+        notFound
+      );
 
       throw new Error("Network response was not ok");
     }
@@ -153,7 +79,7 @@ async function getWordDefinition(e, word) {
     // Have to remove this console.log
     console.log(data);
 
-    hideLoadingSpinner();
+    hideLoadingSpinner(loadingSpinner);
 
     // Generate and insert HTML based on the data
     phonetics = data[0].phonetics;
@@ -163,7 +89,11 @@ async function getWordDefinition(e, word) {
         <span class="word ${colorTheme.isLightTheme ? "" : "word--dark"}">${
       data[0].word
     }</span>
-        <span class="phonetic">${getPhonetic(phonetics)}</span>
+        <span class="phonetic">${getPhonetic(
+          phonetics,
+          language,
+          location
+        )}</span>
       </div>
     </div>`;
 
@@ -187,7 +117,7 @@ async function getWordDefinition(e, word) {
         </audio>
       </button>`;
 
-    if (isAudioAvailable(phonetics)) {
+    if (isAudioAvailable(phonetics, language, location)) {
       const wordPhoneticAudioContainer = document.querySelector(
         ".word-phonetic-audio-container"
       );
