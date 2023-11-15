@@ -99,6 +99,10 @@ function displayNotFoundDiv(
   notFoundElement.classList.remove("hidden");
 }
 
+function capitalizeFirstLetter(word) {
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}
+
 export {
   getLanguageAndLocation,
   doesPhoneticAudioMatch,
@@ -109,4 +113,5 @@ export {
   displayFormInputError,
   hideFormInputError,
   displayNotFoundDiv,
+  capitalizeFirstLetter,
 };

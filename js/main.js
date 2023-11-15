@@ -8,6 +8,7 @@ import {
   displayFormInputError,
   hideFormInputError,
   displayNotFoundDiv,
+  capitalizeFirstLetter,
 } from "./helpers";
 import newWindowIcon from "url:../assets/images/icon-new-window.svg";
 import colorTheme from "./color-themes";
@@ -149,10 +150,6 @@ function insertDefinitions(meanings, index) {
     const meaningsDiv = document.querySelectorAll(".meanings")[index];
     meaningsDiv.insertAdjacentHTML("beforeend", bulletMeaningContainerHTML);
   }
-}
-
-function capitalizeFirstLetter(word) {
-  return word.charAt(0).toUpperCase() + word.slice(1);
 }
 
 function insertSynonymsOrAntonyms(meanings, index, termType) {
@@ -333,8 +330,8 @@ async function handleSynonymOrAntonymClick(e) {
   // Get the definition of the term that was clicked
   await getWordDefinition(e, term);
 
-  // Clear the 'formInput' and scroll to the top of the page
-  formInput.value = "";
+  // Make the value of the 'formInput' be the term that was clicked and scroll to the top of the page
+  formInput.value = term;
 
   window.scrollTo({
     top: 0,
