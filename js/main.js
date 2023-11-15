@@ -29,7 +29,7 @@ let synonymsCount = -1;
 let antonymsCount = -1;
 
 // FUNCTIONS
-function resetFormState() {
+function resetState() {
   displayLoadingSpinner(loadingSpinner);
 
   // Remove focus from 'formInput'
@@ -60,7 +60,8 @@ function insertWordPhoneticAudioContainer() {
         <span class="phonetic">${getPhonetic(
           phonetics,
           language,
-          location
+          location,
+          data
         )}</span>
       </div>
     </div>`;
@@ -150,30 +151,74 @@ function insertDefinitions(meanings, index) {
   }
 }
 
-function insertSynonyms(meanings, index) {
-  const synonyms = meanings[index].synonyms;
+function capitalizeFirstLetter(word) {
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}
 
-  if (synonyms.length > 0) {
-    synonymsCount++;
-    const synonymsContainerHTML = `
-        <div class="synonyms-container">
-          <span class="synonyms-text">Synonyms</span>
-          <div class="synonyms"></div>
-        </div>`;
+function insertSynonymsOrAntonyms(meanings, index, termType) {
+  const terms = meanings[index][termType];
+
+  if (terms.length > 0) {
+    termType === "synonyms" ? synonymsCount++ : antonymsCount++;
+
+    const termTypeContainerHTML = `
+      <div class="${termType}-container">
+        <span class="${termType}-text">${capitalizeFirstLetter(termType)}</span>
+        <div class="${termType}"></div>
+      </div>
+      `;
 
     const wordMeaningsDiv = document.querySelectorAll(".word-meanings")[index];
-    wordMeaningsDiv.insertAdjacentHTML("beforeend", synonymsContainerHTML);
+    wordMeaningsDiv.insertAdjacentHTML("beforeend", termTypeContainerHTML);
 
-    // Loop over the 'synonyms' array and add each synonym to the 'synonyms' div
-    const synonymsDiv = document.querySelectorAll(".synonyms")[synonymsCount];
-    for (let synonym of synonyms) {
-      const synonymHTML = `
-          <span class="synonym">${synonym}</span>
-          `;
+    let termsDiv;
+    // Loop over the 'terms' array and add each term to the 'terms' div
+    if (termType === "synonyms") {
+      termsDiv = document.querySelectorAll(`.${termType}`)[synonymsCount];
+    } else {
+      termsDiv = document.querySelectorAll(`.${termType}`)[antonymsCount];
+    }
 
-      synonymsDiv.insertAdjacentHTML("beforeend", synonymHTML);
+    for (let term of terms) {
+      const termHTML = `
+        <span class="${termType.slice(0, -1)}">${term}</span>
+      `;
+
+      termsDiv.insertAdjacentHTML("beforeend", termHTML);
     }
   }
+}
+
+function insertSource(data, word) {
+  const sourceUrls = data[0].sourceUrls;
+  const sourceLink = sourceUrls.find((url) => url.includes(`/${word}`));
+  const sourceContainerHTML = `
+<div class="source ${colorTheme.isLightTheme ? "" : "source--dark"}">
+  <span class="source__text">Source</span>
+  <div class="source__link-window">
+    <a
+      class="source__link ${
+        colorTheme.isLightTheme ? "" : "source__link--dark"
+      }"
+      href="${sourceLink}"
+      target="_blank"
+      >${sourceLink}</a
+    >
+    <a
+      class="source__new-window-link"
+      href="${sourceLink}"
+      target="_blank"
+    >
+      <img
+        class="source__new-window-icon"
+        src=${newWindowIcon}
+        alt="New window icon"
+      />
+    </a>
+  </div>
+</div>`;
+
+  resultsContainer.insertAdjacentHTML("beforeend", sourceContainerHTML);
 }
 
 // EVENT LISTENER CALLBACK FUNCTION
@@ -187,7 +232,7 @@ async function getWordDefinition(e, word) {
   }
 
   try {
-    resetFormState();
+    resetState();
 
     // Fetch response from API
     const response = await fetch(
@@ -228,65 +273,14 @@ async function getWordDefinition(e, word) {
       insertDefinitions(meanings, i);
 
       // Insert 'synonyms-container' if synonyms exist
-      insertSynonyms(meanings, i);
+      insertSynonymsOrAntonyms(meanings, i, "synonyms");
 
       // Insert 'antonyms-container' if antonyms exist
-      const antonyms = meanings[i].antonyms;
-
-      if (antonyms.length > 0) {
-        antonymsCount++;
-        const antonymsContainerHTML = `
-        <div class="antonyms-container">
-          <span class="antonyms-text">Antonyms</span>
-          <div class="antonyms"></div>
-        </div>`;
-
-        const wordMeaningsDiv = document.querySelectorAll(".word-meanings")[i];
-        wordMeaningsDiv.insertAdjacentHTML("beforeend", antonymsContainerHTML);
-
-        // Loop over the 'antonyms' array and add each antonym to the 'antonyms' div
-        const antonymsDiv =
-          document.querySelectorAll(".antonyms")[antonymsCount];
-        for (let antonym of antonyms) {
-          const antonymHTML = `
-          <span class="antonym">${antonym}</span>
-          `;
-
-          antonymsDiv.insertAdjacentHTML("beforeend", antonymHTML);
-        }
-      }
+      insertSynonymsOrAntonyms(meanings, i, "antonyms");
     }
 
     // Insert source container
-    const sourceUrls = data[0].sourceUrls;
-    const sourceLink = sourceUrls.find((url) => url.includes(`/${word}`));
-    const sourceContainerHTML = `
-    <div class="source ${colorTheme.isLightTheme ? "" : "source--dark"}">
-      <span class="source__text">Source</span>
-      <div class="source__link-window">
-        <a
-          class="source__link ${
-            colorTheme.isLightTheme ? "" : "source__link--dark"
-          }"
-          href="${sourceLink}"
-          target="_blank"
-          >${sourceLink}</a
-        >
-        <a
-          class="source__new-window-link"
-          href="${sourceLink}"
-          target="_blank"
-        >
-          <img
-            class="source__new-window-icon"
-            src=${newWindowIcon}
-            alt="New window icon"
-          />
-        </a>
-      </div>
-    </div>`;
-
-    resultsContainer.insertAdjacentHTML("beforeend", sourceContainerHTML);
+    insertSource(data, word);
   } catch (error) {
     console.error("Error:", error);
   }

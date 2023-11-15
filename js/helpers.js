@@ -15,7 +15,7 @@ function doesPhoneticAudioMatch(phonetic, language, location) {
   );
 }
 
-function getPhonetic(phonetics, language, location) {
+function getPhonetic(phonetics, language, location, data) {
   const phonetic = phonetics.find((phonetic) =>
     doesPhoneticAudioMatch(phonetic, language, location)
   );
