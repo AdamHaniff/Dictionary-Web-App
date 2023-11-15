@@ -10,6 +10,13 @@ import {
   displayNotFoundDiv,
   capitalizeFirstLetter,
 } from "./helpers";
+import {
+  insertWordPhoneticAudioContainer,
+  insertPlayAudioBtn,
+  insertWordMeaningsDiv,
+  insertDefinitions,
+  insertSynonymsOrAntonyms,
+} from "./insert-HTML";
 import newWindowIcon from "url:../assets/images/icon-new-window.svg";
 import colorTheme from "./color-themes";
 import "core-js/stable";
@@ -24,10 +31,9 @@ const loadingSpinner = document.querySelector(".loading-spinner");
 const notFound = document.querySelector(".not-found");
 const { language, location } = getLanguageAndLocation();
 let data;
-let phonetics;
 let meanings;
-let synonymsCount = -1;
-let antonymsCount = -1;
+const info = { phonetics: undefined };
+const termsCount = { synonymsCount: -1, antonymsCount: -1 };
 
 // FUNCTIONS
 function resetState() {
@@ -46,144 +52,8 @@ function resetState() {
   notFound.classList.add("hidden");
 
   // Reset 'synonymsCount' and 'antonymsCount' back to -1
-  synonymsCount = -1;
-  antonymsCount = -1;
-}
-
-function insertWordPhoneticAudioContainer() {
-  phonetics = data[0].phonetics;
-  resultsContainer.innerHTML = `
-    <div class="word-phonetic-audio-container">
-      <div class="word-phonetic-container">
-        <span class="word ${colorTheme.isLightTheme ? "" : "word--dark"}">${
-    data[0].word
-  }</span>
-        <span class="phonetic">${getPhonetic(
-          phonetics,
-          language,
-          location,
-          data
-        )}</span>
-      </div>
-    </div>`;
-}
-
-function insertPlayAudioBtn() {
-  const playAudioBtnHTML = `
-      <button class="play-audio-btn">
-        <svg
-          class="play-audio-icon"
-          xmlns="http://www.w3.org/2000/svg"
-          width="75"
-          height="75"
-          viewBox="0 0 75 75"
-        >
-          <g fill="#A445ED" fill-rule="evenodd">
-            <circle cx="37.5" cy="37.5" r="37.5" opacity=".25" />
-            <path d="M29 27v21l21-10.5z" />
-          </g>
-        </svg>
-        <audio class="pronunciation-audio">
-          Your browser does not support the audio element.
-        </audio>
-      </button>`;
-
-  if (isAudioAvailable(phonetics, language, location)) {
-    const wordPhoneticAudioContainer = document.querySelector(
-      ".word-phonetic-audio-container"
-    );
-
-    wordPhoneticAudioContainer.insertAdjacentHTML(
-      "beforeend",
-      playAudioBtnHTML
-    );
-  }
-}
-
-function insertWordMeaningsDiv(meanings, index) {
-  const wordMeaningsHTML = `
-      <div class="word-meanings">
-        <div class="part-of-speech-line-container">
-          <span class="part-of-speech ${
-            colorTheme.isLightTheme ? "" : "part-of-speech--dark"
-          }">${meanings[index].partOfSpeech}</span>
-          <hr class="horizontal-line ${
-            colorTheme.isLightTheme ? "" : "horizontal-line--dark"
-          }"/>
-        </div>
-        <span class="meaning-text">Meaning</span>
-        <div class="meanings"></div>
-      </div>`;
-
-  resultsContainer.insertAdjacentHTML("beforeend", wordMeaningsHTML);
-}
-
-function insertDefinitions(meanings, index) {
-  const definitions = meanings[index].definitions;
-  for (let definition of definitions) {
-    const bulletMeaningContainerHTML = `
-        <div class="bullet-meaning-container">
-          <svg
-            class="bullet-point"
-            xmlns="http://www.w3.org/2000/svg"
-            width="5"
-            height="5"
-            viewBox="0 0 5 5"
-            fill="none"
-          >
-            <circle cx="2.5" cy="2.5" r="2.5" fill="#8F19E8" />
-          </svg>
-          <div class="word-meaning-example">
-            <p class="word-meaning ${
-              colorTheme.isLightTheme ? "" : "word-meaning--dark"
-            }">
-             ${definition.definition}
-            </p>
-            ${
-              definition.hasOwnProperty("example")
-                ? `<p class="word-example">“${definition.example}”</p>`
-                : ""
-            }
-          </div>
-        </div>`;
-
-    const meaningsDiv = document.querySelectorAll(".meanings")[index];
-    meaningsDiv.insertAdjacentHTML("beforeend", bulletMeaningContainerHTML);
-  }
-}
-
-function insertSynonymsOrAntonyms(meanings, index, termType) {
-  const terms = meanings[index][termType];
-
-  if (terms.length > 0) {
-    termType === "synonyms" ? synonymsCount++ : antonymsCount++;
-
-    const termTypeContainerHTML = `
-      <div class="${termType}-container">
-        <span class="${termType}-text">${capitalizeFirstLetter(termType)}</span>
-        <div class="${termType}"></div>
-      </div>
-      `;
-
-    const wordMeaningsDiv = document.querySelectorAll(".word-meanings")[index];
-    wordMeaningsDiv.insertAdjacentHTML("beforeend", termTypeContainerHTML);
-
-    let termsDiv;
-    // Loop over the 'terms' array and add each term to the 'terms' div
-    if (termType === "synonyms") {
-      termsDiv = document.querySelectorAll(`.${termType}`)[synonymsCount];
-    } else {
-      termsDiv = document.querySelectorAll(`.${termType}`)[antonymsCount];
-    }
-
-    for (let term of terms) {
-      const termHTML = `
-        <span class="${termType.slice(0, -1)}">${term}</span>
-      `;
-
-      termsDiv.insertAdjacentHTML("beforeend", termHTML);
-    }
-  }
+  termsCount.synonymsCount = -1;
+  termsCount.antonymsCount = -1;
 }
 
 function insertSource(data, word) {
@@ -256,24 +126,43 @@ async function getWordDefinition(e, word) {
     hideLoadingSpinner(loadingSpinner);
 
     // Generate and insert HTML based on the data
-    insertWordPhoneticAudioContainer();
+    insertWordPhoneticAudioContainer(
+      data,
+      info,
+      resultsContainer,
+      getPhonetic,
+      language,
+      location
+    );
 
     // Insert HTML for the 'playAudioBtn' if the audio pronunciation is available.
-    insertPlayAudioBtn();
+    insertPlayAudioBtn(isAudioAvailable, info, language, location);
 
     // Insert 'word-meanings' div based on how many meanings there are.
     meanings = data[0].meanings;
 
     for (let i = 0; i < meanings.length; i++) {
       // Insert "word-meanings" div and insert each definition into the "meanings" div
-      insertWordMeaningsDiv(meanings, i);
+      insertWordMeaningsDiv(meanings, i, resultsContainer);
       insertDefinitions(meanings, i);
 
       // Insert 'synonyms-container' if synonyms exist
-      insertSynonymsOrAntonyms(meanings, i, "synonyms");
+      insertSynonymsOrAntonyms(
+        meanings,
+        i,
+        "synonyms",
+        termsCount,
+        capitalizeFirstLetter
+      );
 
       // Insert 'antonyms-container' if antonyms exist
-      insertSynonymsOrAntonyms(meanings, i, "antonyms");
+      insertSynonymsOrAntonyms(
+        meanings,
+        i,
+        "antonyms",
+        termsCount,
+        capitalizeFirstLetter
+      );
     }
 
     // Insert source container
@@ -296,7 +185,7 @@ function handlePlayAudioBtnClick(e) {
   if (!playAudioBtn) return;
 
   // Find the phonetic object where the audio matches the user's language and location
-  const phonetic = phonetics.find((phonetic) =>
+  const phonetic = info.phonetics.find((phonetic) =>
     doesPhoneticAudioMatch(phonetic, language, location)
   );
 
