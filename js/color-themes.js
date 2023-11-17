@@ -10,15 +10,15 @@ const headerToggleRectangle = document.querySelector(
 const headerMoonIconPath = document.querySelector(".header__moon-icon-path");
 const formInput = document.querySelector(".form__input");
 const spinner = document.querySelector(".spinner");
+const notFoundText = document.querySelector(".not-found__text");
+const headerFontStyles = document.querySelector(".header__font-styles");
+const headerFontStyle = document.querySelectorAll(".header__font-style");
 let word;
 let partOfSpeech;
 let horizontalLine;
 let wordMeaning;
 let source;
 let sourceLink;
-const notFoundText = document.querySelector(".not-found__text");
-const headerFontStyles = document.querySelector(".header__font-styles");
-const headerFontStyle = document.querySelectorAll(".header__font-style");
 
 // FUNCTIONS
 function changeWordColor() {

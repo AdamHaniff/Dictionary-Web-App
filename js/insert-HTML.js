@@ -1,3 +1,4 @@
+import newWindowIcon from "url:../assets/images/icon-new-window.svg";
 import colorTheme from "./color-themes";
 
 // FUNCTIONS
@@ -156,10 +157,43 @@ function insertSynonymsOrAntonyms(
   }
 }
 
+function insertSource(data, word, resultsContainer) {
+  const sourceUrls = data[0].sourceUrls;
+  const sourceLink = sourceUrls.find((url) => url.includes(`/${word}`));
+  const sourceContainerHTML = `
+<div class="source ${colorTheme.isLightTheme ? "" : "source--dark"}">
+  <span class="source__text">Source</span>
+  <div class="source__link-window">
+    <a
+      class="source__link ${
+        colorTheme.isLightTheme ? "" : "source__link--dark"
+      }"
+      href="${sourceLink}"
+      target="_blank"
+      >${sourceLink}</a
+    >
+    <a
+      class="source__new-window-link"
+      href="${sourceLink}"
+      target="_blank"
+    >
+      <img
+        class="source__new-window-icon"
+        src=${newWindowIcon}
+        alt="New window icon"
+      />
+    </a>
+  </div>
+</div>`;
+
+  resultsContainer.insertAdjacentHTML("beforeend", sourceContainerHTML);
+}
+
 export {
   insertWordPhoneticAudioContainer,
   insertPlayAudioBtn,
   insertWordMeaningsDiv,
   insertDefinitions,
   insertSynonymsOrAntonyms,
+  insertSource,
 };
