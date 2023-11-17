@@ -13,92 +13,45 @@ const spinner = document.querySelector(".spinner");
 const notFoundText = document.querySelector(".not-found__text");
 const headerFontStyles = document.querySelector(".header__font-styles");
 const headerFontStyle = document.querySelectorAll(".header__font-style");
-let word;
-let partOfSpeech;
-let horizontalLine;
-let wordMeaning;
-let source;
-let sourceLink;
 
 // FUNCTIONS
-function changeWordColor() {
-  word = document.querySelector(".word");
-  if (word) word.classList.toggle("word--dark");
+function toggleElementColor(elementClass, colorClass) {
+  element = document.querySelector(`.${elementClass}`);
+  if (element) element.classList.toggle(colorClass);
 }
 
-function changePartOfSpeechColor() {
-  partOfSpeech = document.querySelectorAll(".part-of-speech");
-  if (partOfSpeech) {
-    for (let el of partOfSpeech) {
-      el.classList.toggle("part-of-speech--dark");
+function toggleMultipleElementColor(elementsClass, colorClass) {
+  elements = document.querySelectorAll(`.${elementsClass}`);
+  if (elements) {
+    for (let el of elements) {
+      el.classList.toggle(colorClass);
     }
   }
-}
-
-function changeHorizontalLineColor() {
-  horizontalLine = document.querySelectorAll(".horizontal-line");
-  if (horizontalLine) {
-    for (let el of horizontalLine) {
-      el.classList.toggle("horizontal-line--dark");
-    }
-  }
-}
-
-function changeWordMeaningColor() {
-  wordMeaning = document.querySelectorAll(".word-meaning");
-  if (wordMeaning) {
-    for (let el of wordMeaning) {
-      el.classList.toggle("word-meaning--dark");
-    }
-  }
-}
-
-function changeSourceBorderTopColor() {
-  source = document.querySelector(".source");
-  if (source) source.classList.toggle("source--dark");
-}
-
-function changeSourceLinkColor() {
-  sourceLink = document.querySelector(".source__link");
-  if (sourceLink) sourceLink.classList.toggle("source__link--dark");
 }
 
 function changeHeaderFontStyleColor() {
   for (let el of headerFontStyle) {
-    el.classList.toggle("header__font-style--dark");
+    el.classList.toggle("dark");
   }
 }
 
-function switchToLightTheme() {
-  bodyElement.classList.toggle("body--dark");
-  headerFont.classList.toggle("header__font--dark");
-  headerMoonIconPath.classList.toggle("header__moon-icon-path--dark");
-  formInput.classList.toggle("form__input--dark");
-  spinner.classList.toggle("spinner--dark");
-  changeWordColor();
-  changePartOfSpeechColor();
-  changeHorizontalLineColor();
-  changeWordMeaningColor();
-  changeSourceBorderTopColor();
-  changeSourceLinkColor();
-  notFoundText.classList.toggle("not-found__text--dark");
-  headerFontStyles.classList.toggle("header__font-styles--dark");
-  changeHeaderFontStyleColor();
-}
+function changeColorTheme() {
+  // Change the boolean value of the 'isLightTheme' property to the opposite.
+  colorTheme.isLightTheme = !colorTheme.isLightTheme;
 
-function switchToDarkTheme() {
+  // Toggle classes on/off for the following elements based on the current color theme.
   bodyElement.classList.toggle("body--dark");
-  headerFont.classList.toggle("header__font--dark");
+  headerFont.classList.toggle("dark");
   headerMoonIconPath.classList.toggle("header__moon-icon-path--dark");
   formInput.classList.toggle("form__input--dark");
   spinner.classList.toggle("spinner--dark");
-  changeWordColor();
-  changePartOfSpeechColor();
-  changeHorizontalLineColor();
-  changeWordMeaningColor();
-  changeSourceBorderTopColor();
-  changeSourceLinkColor();
-  notFoundText.classList.toggle("not-found__text--dark");
+  toggleElementColor("word", "dark");
+  toggleMultipleElementColor("part-of-speech", "dark");
+  toggleMultipleElementColor("horizontal-line", "horizontal-line--dark");
+  toggleMultipleElementColor("word-meaning", "dark");
+  toggleElementColor("source", "source--dark");
+  toggleElementColor("source__link", "source__link--dark");
+  notFoundText.classList.toggle("dark");
   headerFontStyles.classList.toggle("header__font-styles--dark");
   changeHeaderFontStyleColor();
 }
@@ -112,13 +65,8 @@ function handleHeaderToggleBtnClick(e) {
   headerToggleRectangle.classList.toggle("header__toggle-rectangle--dark");
   headerToggleOval.classList.toggle("header__toggle-oval--dark");
 
-  if (colorTheme.isLightTheme) {
-    colorTheme.isLightTheme = false;
-    switchToDarkTheme();
-  } else {
-    colorTheme.isLightTheme = true;
-    switchToLightTheme();
-  }
+  // Change the color theme to light or dark.
+  changeColorTheme();
 }
 
 // EVENT LISTENER

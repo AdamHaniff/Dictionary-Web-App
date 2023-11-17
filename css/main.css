@@ -348,6 +348,10 @@ html {
   display: none;
 }
 
+.dark {
+  color: #fff;
+}
+
 .body--font-inter {
   font-family: "Inter", sans-serif;
 }
@@ -362,10 +366,6 @@ html {
 
 .body--dark {
   background: #050505;
-}
-
-.header__font--dark {
-  color: #fff;
 }
 
 .header__moon-icon-path--dark {
@@ -385,10 +385,6 @@ html {
 .header__font-styles--dark {
   background: #1f1f1f;
   box-shadow: 0 0.5rem 3rem 0 #a445ed;
-}
-
-.header__font-style--dark {
-  color: #fff;
 }
 
 .form__input--red {
@@ -413,20 +409,8 @@ html {
   border-top: 0.4rem solid #fff;
 }
 
-.word--dark {
-  color: #fff;
-}
-
-.part-of-speech--dark {
-  color: #fff;
-}
-
 .horizontal-line--dark {
   border: 0.1rem solid #3a3a3a;
-}
-
-.word-meaning--dark {
-  color: #fff;
 }
 
 .source--dark {
@@ -436,8 +420,4 @@ html {
 .source__link--dark {
   color: #fff;
   border-bottom: 0.1rem solid #2f2f2f;
-}
-
-.not-found__text--dark {
-  color: #fff;
 }/*# sourceMappingURL=main.css.map */

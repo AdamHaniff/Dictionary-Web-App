@@ -417,6 +417,10 @@ html {
   display: none;
 }
 
+.dark {
+  color: $color-white;
+}
+
 // ************** BODY **************
 .body--font-inter {
   font-family: $font-inter;
@@ -435,10 +439,6 @@ html {
 }
 
 // ************* HEADER *************
-.header__font--dark {
-  color: $color-white;
-}
-
 .header__moon-icon-path--dark {
   stroke: $color-jasminePurple;
 }
@@ -456,10 +456,6 @@ html {
 .header__font-styles--dark {
   background: $color-darkJungleGreen;
   box-shadow: 0 0.5rem 3rem 0 $color-jasminePurple;
-}
-
-.header__font-style--dark {
-  color: $color-white;
 }
 
 // ************** FORM **************
@@ -482,22 +478,9 @@ html {
   border-top: 0.4rem solid $color-white;
 }
 
-// * WORD-PHONETIC-AUDIO-CONTAINER *
-.word--dark {
-  color: $color-white;
-}
-
-// ********* WORD-MEANINGS *********
-.part-of-speech--dark {
-  color: $color-white;
-}
-
+// ********** WORD-MEANINGS **********
 .horizontal-line--dark {
   border: 0.1rem solid $color-iridium;
-}
-
-.word-meaning--dark {
-  color: $color-white;
 }
 
 // ************* SOURCE **************
@@ -508,9 +491,4 @@ html {
 .source__link--dark {
   color: $color-white;
   border-bottom: 0.1rem solid $color-heavyMetal;
-}
-
-// ************ NOT FOUND ************
-.not-found__text--dark {
-  color: $color-white;
 }

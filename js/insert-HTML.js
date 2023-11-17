@@ -14,7 +14,7 @@ function insertWordPhoneticAudioContainer(
   resultsContainer.innerHTML = `
     <div class="word-phonetic-audio-container">
       <div class="word-phonetic-container">
-        <span class="word ${colorTheme.isLightTheme ? "" : "word--dark"}">${
+        <span class="word ${colorTheme.isLightTheme ? "" : "dark"}">${
     data[0].word
   }</span>
         <span class="phonetic">${getPhonetic(
@@ -64,7 +64,7 @@ function insertWordMeaningsDiv(meanings, index, resultsContainer) {
       <div class="word-meanings">
         <div class="part-of-speech-line-container">
           <span class="part-of-speech ${
-            colorTheme.isLightTheme ? "" : "part-of-speech--dark"
+            colorTheme.isLightTheme ? "" : "dark"
           }">${meanings[index].partOfSpeech}</span>
           <hr class="horizontal-line ${
             colorTheme.isLightTheme ? "" : "horizontal-line--dark"
@@ -93,9 +93,7 @@ function insertDefinitions(meanings, index) {
             <circle cx="2.5" cy="2.5" r="2.5" fill="#8F19E8" />
           </svg>
           <div class="word-meaning-example">
-            <p class="word-meaning ${
-              colorTheme.isLightTheme ? "" : "word-meaning--dark"
-            }">
+            <p class="word-meaning ${colorTheme.isLightTheme ? "" : "dark"}">
              ${definition.definition}
             </p>
             ${
