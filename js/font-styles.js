@@ -1,3 +1,5 @@
+import { hideElement } from "./helpers";
+
 // VARIABLES
 const headerFontContainer = document.querySelector(".header__font-container");
 const headerFontStyles = document.querySelector(".header__font-styles");
@@ -5,8 +7,22 @@ const headerFont = document.querySelector(".header__font");
 const bodyElement = document.body;
 
 // FUNCTIONS
-function hideHeaderFontStyles() {
-  headerFontStyles.classList.add("hidden");
+function removeFontClasses() {
+  bodyElement.classList.remove(
+    "body--font-inter",
+    "body--font-lora",
+    "body--font-inconsolata"
+  );
+}
+
+function changeFontFamily(fontStyle) {
+  if (fontStyle === "Sans Serif") {
+    bodyElement.classList.add("body--font-inter");
+  } else if (fontStyle === "Serif") {
+    bodyElement.classList.add("body--font-lora");
+  } else if (fontStyle === "Mono") {
+    bodyElement.classList.add("body--font-inconsolata");
+  }
 }
 
 // EVENT LISTENER CALLBACK FUNCTIONS
@@ -19,7 +35,7 @@ function handleHeaderFontContainerClick(e) {
     !headerFontStyles.classList.contains("hidden") &&
     e.target.closest(".header__font-styles") !== headerFontStyles
   ) {
-    hideHeaderFontStyles();
+    hideElement(headerFontStyles);
     return;
   }
 
@@ -29,27 +45,16 @@ function handleHeaderFontContainerClick(e) {
 
 function handleHeaderFontStylesClick(e) {
   if (e.target.classList.contains("header__font-style")) {
-    // Change the textContent of 'headerFont' to the font style that was clicked
+    // Change the textContent of 'headerFont' to the font style that was clicked and hide 'headerFontStyles'.
     const fontStyle = e.target.textContent;
     headerFont.textContent = fontStyle;
-
-    hideHeaderFontStyles();
+    hideElement(headerFontStyles);
 
     // Remove all existing font classes
-    bodyElement.classList.remove(
-      "body--font-inter",
-      "body--font-lora",
-      "body--font-inconsolata"
-    );
+    removeFontClasses();
 
     // Change body element's 'font-family' value to the font style that was clicked
-    if (fontStyle === "Sans Serif") {
-      bodyElement.classList.add("body--font-inter");
-    } else if (fontStyle === "Serif") {
-      bodyElement.classList.add("body--font-lora");
-    } else if (fontStyle === "Mono") {
-      bodyElement.classList.add("body--font-inconsolata");
-    }
+    changeFontFamily(fontStyle);
 
     // Stop the click event from propagating to the parent container
     e.stopPropagation();
@@ -58,7 +63,7 @@ function handleHeaderFontStylesClick(e) {
 
 function handleDocumentClick(e) {
   if (e.target.closest(".header__font-container") !== headerFontContainer) {
-    hideHeaderFontStyles();
+    hideElement(headerFontStyles);
   }
 }
 

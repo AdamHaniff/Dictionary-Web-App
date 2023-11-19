@@ -1,9 +1,9 @@
 import {
+  hideElement,
   getLanguageAndLocation,
   doesPhoneticAudioMatch,
   getPhonetic,
   isAudioAvailable,
-  hideLoadingSpinner,
   displayLoadingSpinner,
   displayFormInputError,
   hideFormInputError,
@@ -48,7 +48,7 @@ function resetState() {
   hideFormInputError(formInput, formInputError);
 
   // Hide 'notFound' div if it is currently displayed
-  notFound.classList.add("hidden");
+  hideElement(notFound);
 
   // Reset 'synonymsCount' and 'antonymsCount' back to -1
   termsCount.synonymsCount = -1;
@@ -90,7 +90,7 @@ async function getWordDefinition(e, word) {
 
     // Retrieve data and hide the 'loadingSpinner'
     data = await response.json();
-    hideLoadingSpinner(loadingSpinner);
+    hideElement(loadingSpinner);
 
     // Generate and insert HTML based on the data
     insertWordPhoneticAudioContainer(

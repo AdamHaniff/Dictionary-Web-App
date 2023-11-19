@@ -1,4 +1,11 @@
 // HELPERS
+
+// Helper for every file
+function hideElement(element) {
+  element.classList.add("hidden");
+}
+
+// Helpers for 'main.js'
 function getLanguageAndLocation() {
   const preferredLanguage = navigator.language;
   const [language, location] = preferredLanguage.split("-");
@@ -41,10 +48,6 @@ function isAudioAvailable(phonetics, language, location) {
   );
 }
 
-function hideLoadingSpinner(spinnerElement) {
-  spinnerElement.classList.add("hidden");
-}
-
 function displayLoadingSpinner(spinnerElement) {
   spinnerElement.classList.remove("hidden");
 }
@@ -55,7 +58,7 @@ function displayFormInputError(
   formInputErrorElement,
   notFoundElement
 ) {
-  hideLoadingSpinner(spinnerElement);
+  hideElement(spinnerElement);
 
   // Remove focus from 'formInput'
   formInputElement.blur();
@@ -67,7 +70,7 @@ function displayFormInputError(
   formInputErrorElement.classList.remove("hidden");
 
   // Hide 'notFound' div if it is currently being displayed
-  notFoundElement.classList.add("hidden");
+  hideElement(notFoundElement);
 }
 
 function hideFormInputError(formInputElement, formInputErrorElement) {
@@ -75,7 +78,7 @@ function hideFormInputError(formInputElement, formInputErrorElement) {
   formInputElement.classList.remove("form__input--red");
 
   // Hide 'formInputError' if it is currently being displayed.
-  formInputErrorElement.classList.add("hidden");
+  hideElement(formInputErrorElement);
 }
 
 function displayNotFoundDiv(
@@ -85,7 +88,7 @@ function displayNotFoundDiv(
   resultsContainerElement,
   notFoundElement
 ) {
-  hideLoadingSpinner(spinnerElement);
+  hideElement(spinnerElement);
 
   // Remove focus from 'formInput'
   formInputElement.blur();
@@ -103,6 +106,7 @@ function capitalizeFirstLetter(word) {
   return word.charAt(0).toUpperCase() + word.slice(1);
 }
 
+// Helpers for 'color-themes.js'
 function toggleElementColor(elementClass, colorClass) {
   element = document.querySelector(`.${elementClass}`);
   if (element) element.classList.toggle(colorClass);
@@ -138,11 +142,11 @@ function updateElementColors(classesToToggle) {
 }
 
 export {
+  hideElement,
   getLanguageAndLocation,
   doesPhoneticAudioMatch,
   getPhonetic,
   isAudioAvailable,
-  hideLoadingSpinner,
   displayLoadingSpinner,
   displayFormInputError,
   hideFormInputError,
@@ -150,3 +154,4 @@ export {
   capitalizeFirstLetter,
   updateElementColors,
 };
+
