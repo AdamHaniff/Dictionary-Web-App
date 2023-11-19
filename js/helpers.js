@@ -103,6 +103,40 @@ function capitalizeFirstLetter(word) {
   return word.charAt(0).toUpperCase() + word.slice(1);
 }
 
+function toggleElementColor(elementClass, colorClass) {
+  element = document.querySelector(`.${elementClass}`);
+  if (element) element.classList.toggle(colorClass);
+}
+
+function toggleMultipleElementsColor(elementsClass, colorClass) {
+  elements = document.querySelectorAll(`.${elementsClass}`);
+  if (elements) {
+    for (let el of elements) {
+      el.classList.toggle(colorClass);
+    }
+  }
+}
+
+function toggleClasses(classesToToggle) {
+  classesToToggle.forEach(({ element, className }) => {
+    element.classList.toggle(className);
+  });
+}
+
+function updateElementColors(classesToToggle) {
+  // Toggle classes on/off for elements that are already in the DOM.
+  toggleClasses(classesToToggle);
+
+  // Toggle classes on/off for elements that are not already in the DOM.
+  toggleElementColor("word", "dark");
+  toggleMultipleElementsColor("part-of-speech", "dark");
+  toggleMultipleElementsColor("horizontal-line", "horizontal-line--dark");
+  toggleMultipleElementsColor("word-meaning", "dark");
+  toggleElementColor("source", "source--dark");
+  toggleElementColor("source__link", "source__link--dark");
+  toggleMultipleElementsColor("header__font-style", "dark");
+}
+
 export {
   getLanguageAndLocation,
   doesPhoneticAudioMatch,
@@ -114,4 +148,5 @@ export {
   hideFormInputError,
   displayNotFoundDiv,
   capitalizeFirstLetter,
+  updateElementColors,
 };

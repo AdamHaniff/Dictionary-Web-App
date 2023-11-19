@@ -1,3 +1,5 @@
+import { updateElementColors } from "./helpers";
+
 // VARIABLES
 const colorTheme = { isLightTheme: true };
 const bodyElement = document.body;
@@ -12,48 +14,20 @@ const formInput = document.querySelector(".form__input");
 const spinner = document.querySelector(".spinner");
 const notFoundText = document.querySelector(".not-found__text");
 const headerFontStyles = document.querySelector(".header__font-styles");
-const headerFontStyle = document.querySelectorAll(".header__font-style");
-
-// FUNCTIONS
-function toggleElementColor(elementClass, colorClass) {
-  element = document.querySelector(`.${elementClass}`);
-  if (element) element.classList.toggle(colorClass);
-}
-
-function toggleMultipleElementColor(elementsClass, colorClass) {
-  elements = document.querySelectorAll(`.${elementsClass}`);
-  if (elements) {
-    for (let el of elements) {
-      el.classList.toggle(colorClass);
-    }
-  }
-}
-
-function changeHeaderFontStyleColor() {
-  for (let el of headerFontStyle) {
-    el.classList.toggle("dark");
-  }
-}
+const classesToToggle = [
+  { element: bodyElement, className: "body--dark" },
+  { element: headerFont, className: "dark" },
+  { element: headerMoonIconPath, className: "header__moon-icon-path--dark" },
+  { element: formInput, className: "form__input--dark" },
+  { element: spinner, className: "spinner--dark" },
+  { element: notFoundText, className: "dark" },
+  { element: headerFontStyles, className: "header__font-styles--dark" },
+];
 
 function changeColorTheme() {
-  // Change the boolean value of the 'isLightTheme' property to the opposite.
+  // Change the boolean value of the 'isLightTheme' property to the opposite and update the colors based on the current color theme.
   colorTheme.isLightTheme = !colorTheme.isLightTheme;
-
-  // Toggle classes on/off for the following elements based on the current color theme.
-  bodyElement.classList.toggle("body--dark");
-  headerFont.classList.toggle("dark");
-  headerMoonIconPath.classList.toggle("header__moon-icon-path--dark");
-  formInput.classList.toggle("form__input--dark");
-  spinner.classList.toggle("spinner--dark");
-  toggleElementColor("word", "dark");
-  toggleMultipleElementColor("part-of-speech", "dark");
-  toggleMultipleElementColor("horizontal-line", "horizontal-line--dark");
-  toggleMultipleElementColor("word-meaning", "dark");
-  toggleElementColor("source", "source--dark");
-  toggleElementColor("source__link", "source__link--dark");
-  notFoundText.classList.toggle("dark");
-  headerFontStyles.classList.toggle("header__font-styles--dark");
-  changeHeaderFontStyleColor();
+  updateElementColors(classesToToggle);
 }
 
 // EVENT LISTENER CALLBACK FUNCTION
