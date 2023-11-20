@@ -1,8 +1,12 @@
 // HELPERS
 
-// Helper for every file
+// Helpers for every file
 function hideElement(element) {
   element.classList.add("hidden");
+}
+
+function displayElement(element) {
+  element.classList.remove("hidden");
 }
 
 // Helpers for 'main.js'
@@ -36,7 +40,7 @@ function getPhonetic(phonetics, language, location, data) {
 
   // If there is no audio value and there is no 'phonetic' property, have the 'phoneticValue' be equal to the 'text' property's value in the first object of the 'phonetics' array.
   if (phoneticValue === "" && !data[0].hasOwnProperty("phonetic")) {
-    phoneticValue = phonetics[0].text;
+    phoneticValue = phonetics[0]?.text;
   }
 
   return phoneticValue === undefined ? "" : phoneticValue;
@@ -46,10 +50,6 @@ function isAudioAvailable(phonetics, language, location) {
   return phonetics.some((phonetic) =>
     doesPhoneticAudioMatch(phonetic, language, location)
   );
-}
-
-function displayLoadingSpinner(spinnerElement) {
-  spinnerElement.classList.remove("hidden");
 }
 
 function displayFormInputError(
@@ -67,7 +67,7 @@ function displayFormInputError(
   formInputElement.classList.add("form__input--red");
 
   // Display 'form__input-error'
-  formInputErrorElement.classList.remove("hidden");
+  displayElement(formInputErrorElement);
 
   // Hide 'notFound' div if it is currently being displayed
   hideElement(notFoundElement);
@@ -99,7 +99,7 @@ function displayNotFoundDiv(
   resultsContainerElement.innerHTML = "";
 
   // Display the 'notFound' div
-  notFoundElement.classList.remove("hidden");
+  displayElement(notFoundElement);
 }
 
 function capitalizeFirstLetter(word) {
@@ -141,17 +141,33 @@ function updateElementColors(classesToToggle) {
   toggleMultipleElementsColor("header__font-style", "dark");
 }
 
+// Helpers for 'font-styles.js'
+function removeClasses(element, ...classes) {
+  element.classList.remove(...classes);
+}
+
+function changeFontFamily(fontStyle, element) {
+  if (fontStyle === "Sans Serif") {
+    element.classList.add("body--font-inter");
+  } else if (fontStyle === "Serif") {
+    element.classList.add("body--font-lora");
+  } else if (fontStyle === "Mono") {
+    element.classList.add("body--font-inconsolata");
+  }
+}
+
 export {
   hideElement,
+  displayElement,
   getLanguageAndLocation,
   doesPhoneticAudioMatch,
   getPhonetic,
   isAudioAvailable,
-  displayLoadingSpinner,
   displayFormInputError,
   hideFormInputError,
   displayNotFoundDiv,
   capitalizeFirstLetter,
   updateElementColors,
+  removeClasses,
+  changeFontFamily,
 };
-

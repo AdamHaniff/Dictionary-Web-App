@@ -1,10 +1,10 @@
 import {
   hideElement,
+  displayElement,
   getLanguageAndLocation,
   doesPhoneticAudioMatch,
   getPhonetic,
   isAudioAvailable,
-  displayLoadingSpinner,
   displayFormInputError,
   hideFormInputError,
   displayNotFoundDiv,
@@ -36,7 +36,7 @@ let meanings;
 
 // FUNCTIONS
 function resetState() {
-  displayLoadingSpinner(loadingSpinner);
+  displayElement(loadingSpinner);
 
   // Remove focus from 'formInput'
   formInput.blur();

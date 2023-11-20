@@ -1,4 +1,9 @@
-import { hideElement } from "./helpers";
+import {
+  hideElement,
+  removeClasses,
+  changeFontFamily,
+  displayElement,
+} from "./helpers";
 
 // VARIABLES
 const headerFontContainer = document.querySelector(".header__font-container");
@@ -6,41 +11,23 @@ const headerFontStyles = document.querySelector(".header__font-styles");
 const headerFont = document.querySelector(".header__font");
 const bodyElement = document.body;
 
-// FUNCTIONS
-function removeFontClasses() {
-  bodyElement.classList.remove(
-    "body--font-inter",
-    "body--font-lora",
-    "body--font-inconsolata"
-  );
-}
-
-function changeFontFamily(fontStyle) {
-  if (fontStyle === "Sans Serif") {
-    bodyElement.classList.add("body--font-inter");
-  } else if (fontStyle === "Serif") {
-    bodyElement.classList.add("body--font-lora");
-  } else if (fontStyle === "Mono") {
-    bodyElement.classList.add("body--font-inconsolata");
-  }
-}
-
 // EVENT LISTENER CALLBACK FUNCTIONS
 function handleHeaderFontContainerClick(e) {
   const headerFontContainer = e.target.closest(".header__font-container");
   if (!headerFontContainer) return;
 
-  // If 'headerFontStyles' is currently being displayed, hide it
-  if (
+  // If 'headerFontStyles' is currently being displayed, hide it.
+  const isHeaderFontStylesDisplayed =
     !headerFontStyles.classList.contains("hidden") &&
-    e.target.closest(".header__font-styles") !== headerFontStyles
-  ) {
+    e.target.closest(".header__font-styles") !== headerFontStyles;
+
+  if (isHeaderFontStylesDisplayed) {
     hideElement(headerFontStyles);
     return;
   }
 
   // Display headerFontStyles
-  headerFontStyles.classList.remove("hidden");
+  displayElement(headerFontStyles);
 }
 
 function handleHeaderFontStylesClick(e) {
@@ -51,10 +38,15 @@ function handleHeaderFontStylesClick(e) {
     hideElement(headerFontStyles);
 
     // Remove all existing font classes
-    removeFontClasses();
+    removeClasses(
+      bodyElement,
+      "body--font-inter",
+      "body--font-lora",
+      "body--font-inconsolata"
+    );
 
     // Change body element's 'font-family' value to the font style that was clicked
-    changeFontFamily(fontStyle);
+    changeFontFamily(fontStyle, bodyElement);
 
     // Stop the click event from propagating to the parent container
     e.stopPropagation();
