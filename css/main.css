@@ -17,6 +17,14 @@ html {
   padding: 2.4rem 2.4rem 0;
 }
 
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .header {
   display: flex;
   align-items: center;
@@ -160,14 +168,6 @@ html {
   margin: 0 auto;
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
 .word-phonetic-audio-container {
   display: flex;
   justify-content: space-between;

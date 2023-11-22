@@ -1,0 +1,80 @@
+// ** CLASSES USED WITH JAVASCRIPT **
+.hidden {
+  display: none;
+}
+
+.dark {
+  color: $color-white;
+}
+
+// ************** BODY **************
+.body--font-inter {
+  font-family: $font-inter;
+}
+
+.body--font-lora {
+  font-family: $font-lora;
+}
+
+.body--font-inconsolata {
+  font-family: $font-inconsolata;
+}
+
+.body--dark {
+  background: $color-black;
+}
+
+// ************* HEADER *************
+.header__moon-icon-path--dark {
+  stroke: $color-jasminePurple;
+}
+
+.header__toggle-rectangle--dark {
+  background: $color-jasminePurple;
+  transition: all 0.3s;
+}
+
+.header__toggle-oval--dark {
+  transform: translateX(2.3rem);
+  transition: all 0.3s;
+}
+
+.header__font-styles--dark {
+  background: $color-darkJungleGreen;
+  box-shadow: 0 0.5rem 3rem 0 $color-jasminePurple;
+}
+
+// ************** FORM **************
+.form__input--red {
+  border: 0.1rem solid $color-sunsetOrange;
+}
+
+.form__input--dark {
+  background: $color-darkJungleGreen;
+  color: $color-white;
+}
+
+.form__input--dark::placeholder {
+  color: $color-davyGrey;
+}
+
+// ************* SPINNER ************
+.spinner--dark {
+  border: 0.4rem solid $color-jasminePurple;
+  border-top: 0.4rem solid $color-white;
+}
+
+// ********** WORD-MEANINGS **********
+.horizontal-line--dark {
+  border: 0.1rem solid $color-iridium;
+}
+
+// ************* SOURCE **************
+.source--dark {
+  border-top: 0.1rem solid $color-iridium;
+}
+
+.source__link--dark {
+  color: $color-white;
+  border-bottom: 0.1rem solid $color-heavyMetal;
+}
