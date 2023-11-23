@@ -24,20 +24,32 @@ const classesToToggle = [
   { element: headerFontStyles, className: "header__font-styles--dark" },
 ];
 
+// FUNCTIONS
 function changeColorTheme() {
+  // Change background of 'headerToggleRectangle' and change the position of 'headerToggleOval' depending on the color theme.
+  headerToggleRectangle.classList.toggle("header__toggle-rectangle--dark");
+  headerToggleOval.classList.toggle("header__toggle-oval--dark");
+
   // Change the boolean value of the 'isLightTheme' property to the opposite and update the colors based on the current color theme.
   colorTheme.isLightTheme = !colorTheme.isLightTheme;
   updateElementColors(classesToToggle);
 }
 
+(function () {
+  // Check if the user prefers dark mode
+  if (
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+  ) {
+    // Change color theme to dark
+    changeColorTheme();
+  }
+})();
+
 // EVENT LISTENER CALLBACK FUNCTION
 function handleHeaderToggleBtnClick(e) {
   const headerToggleBtn = e.target.closest(".header__toggle-btn");
   if (!headerToggleBtn) return;
-
-  // Change background of 'headerToggleRectangle' and change the position of 'headerToggleOval' depending on the color theme.
-  headerToggleRectangle.classList.toggle("header__toggle-rectangle--dark");
-  headerToggleOval.classList.toggle("header__toggle-oval--dark");
 
   // Change the color theme to light or dark.
   changeColorTheme();

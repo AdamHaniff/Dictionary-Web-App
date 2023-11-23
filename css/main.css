@@ -14,7 +14,6 @@ html {
 .body {
   background: #fff;
   font-family: "Inter", sans-serif;
-  padding: 2.4rem 2.4rem 0;
 }
 
 @keyframes spin {
@@ -25,6 +24,10 @@ html {
     transform: rotate(360deg);
   }
 }
+.body {
+  padding: 2.4rem 2.4rem 0;
+}
+
 .header {
   display: flex;
   align-items: center;
@@ -344,6 +347,38 @@ html {
   line-height: 1.92rem;
 }
 
+@media only screen and (min-width: 35.75em) {
+  .body {
+    padding: 4.1rem 3.15rem 0;
+  }
+  .header {
+    margin-bottom: 3.775rem;
+  }
+  .header__logo {
+    width: 3rem;
+    height: 3.425rem;
+  }
+  .header__font-toggle-container {
+    gap: 2.1rem;
+  }
+  .header__font-container {
+    gap: 1.7rem;
+  }
+  .header__font {
+    font-size: 1.6rem;
+  }
+  .header__font-styles {
+    gap: 1.4rem;
+    width: 16.35rem;
+    height: 13.6rem;
+    padding: 2.15rem 0 0 2.15rem;
+    top: 4rem;
+  }
+  .header__font-style {
+    font-size: 1.6rem;
+    line-height: 2.15rem;
+  }
+}
 .hidden {
   display: none;
 }
