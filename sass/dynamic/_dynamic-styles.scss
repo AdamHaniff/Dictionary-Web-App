@@ -74,6 +74,10 @@
   border-top: 0.1rem solid $color-iridium;
 }
 
+.source__text--dark {
+  border-bottom: 0.1rem solid $color-heavyMetal;
+}
+
 .source__link--dark {
   color: $color-white;
   border-bottom: 0.1rem solid $color-heavyMetal;

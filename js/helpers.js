@@ -137,6 +137,7 @@ function updateElementColors(classesToToggle) {
   toggleMultipleElementsColor("horizontal-line", "horizontal-line--dark");
   toggleMultipleElementsColor("word-meaning", "dark");
   toggleElementColor("source", "source--dark");
+  toggleElementColor("source__text", "source__text--dark");
   toggleElementColor("source__link", "source__link--dark");
   toggleMultipleElementsColor("header__font-style", "dark");
 }

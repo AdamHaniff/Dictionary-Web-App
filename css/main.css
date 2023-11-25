@@ -303,10 +303,10 @@ html {
   padding: 2.4rem 0 8.5rem;
 }
 .source__text {
-  display: block;
+  display: inline-block;
   color: #757575;
   font-size: 1.4rem;
-  text-decoration: underline;
+  border-bottom: 0.1rem solid #757575;
   margin-bottom: 0.8rem;
 }
 .source__link-window {
@@ -544,6 +544,10 @@ html {
 
 .source--dark {
   border-top: 0.1rem solid #3a3a3a;
+}
+
+.source__text--dark {
+  border-bottom: 0.1rem solid #2f2f2f;
 }
 
 .source__link--dark {
