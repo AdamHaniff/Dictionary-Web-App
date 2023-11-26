@@ -520,6 +520,57 @@ html {
   .form__input-error {
     font-size: 1.9rem;
   }
+  .spinner {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  .word-phonetic-audio-container {
+    margin-bottom: 4rem;
+  }
+  .word {
+    font-size: 6.4rem;
+  }
+  .phonetic {
+    font-size: 2.4rem;
+  }
+  .play-audio-btn, .play-audio-icon {
+    width: 7.5rem;
+    height: 7.5rem;
+  }
+  .part-of-speech-line-container {
+    gap: 2rem;
+    height: 2.9rem;
+    margin-bottom: 4rem;
+  }
+  .part-of-speech {
+    font-size: 2.4rem;
+  }
+  .word-meanings {
+    margin-bottom: 4rem;
+  }
+  .meaning-text {
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+  }
+  .word-meaning {
+    font-size: 1.8rem;
+  }
+  .synonyms-container,
+  .antonyms-container {
+    margin-top: 4rem;
+  }
+  .synonyms-text,
+  .antonyms-text {
+    font-size: 2rem;
+  }
+  .synonyms,
+  .antonyms {
+    gap: 1.7rem;
+  }
+  .synonym,
+  .antonym {
+    font-size: 2rem;
+  }
 }
 .hidden {
   display: none;

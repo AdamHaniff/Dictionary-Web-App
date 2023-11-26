@@ -60,4 +60,78 @@
       font-size: 1.9rem;
     }
   }
+
+  // ******** LOADING-SPINNER *********
+  .spinner {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  // * WORD-PHONETIC-AUDIO-CONTAINER *
+  .word-phonetic-audio-container {
+    margin-bottom: 4rem;
+  }
+
+  .word {
+    font-size: 6.4rem;
+  }
+
+  .phonetic {
+    font-size: 2.4rem;
+  }
+
+  .play-audio {
+    &-btn,
+    &-icon {
+      width: 7.5rem;
+      height: 7.5rem;
+    }
+  }
+
+  // * PART OF SPEECH LINE CONTAINER *
+  .part-of-speech-line-container {
+    gap: 2rem;
+    height: 2.9rem;
+    margin-bottom: 4rem;
+  }
+
+  .part-of-speech {
+    font-size: 2.4rem;
+  }
+
+  // ********* WORD MEANINGS *********
+  .word-meanings {
+    margin-bottom: 4rem;
+  }
+
+  .meaning-text {
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .word-meaning {
+    font-size: 1.8rem;
+  }
+
+  .synonyms-container,
+  .antonyms-container {
+    margin-top: 4rem;
+  }
+
+  .synonyms-text,
+  .antonyms-text {
+    font-size: 2rem;
+  }
+
+  .synonyms,
+  .antonyms {
+    gap: 1.7rem;
+  }
+
+  .synonym,
+  .antonym {
+    font-size: 2rem;
+  }
+
+  // ************* SOURCE *************
 }
