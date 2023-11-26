@@ -1,0 +1,63 @@
+// *********** 768px LAYOUT ***********
+@media only screen and (min-width: 48em) {
+  .body {
+    padding: 5.8rem 4rem 0;
+  }
+
+  // ************* HEADER *************
+  .header {
+    margin-bottom: 5.15rem;
+
+    &__logo {
+      width: 3.2rem;
+      height: 3.65rem;
+    }
+
+    &__font-toggle-container {
+      gap: 2.6rem;
+    }
+
+    &__font-container {
+      gap: 1.8rem;
+    }
+
+    &__font {
+      font-size: 1.8rem;
+    }
+
+    &__font-styles {
+      gap: 1.6rem;
+      width: 17.325rem;
+      height: 14.4rem;
+      padding: 2.275rem 0 0 2.275rem;
+      top: 4.1rem;
+    }
+
+    &__font-style {
+      font-size: 1.7rem;
+      line-height: 2.275rem;
+    }
+
+    &__toggle-moon-container {
+      gap: 2rem;
+    }
+  }
+
+  // ************** FORM **************
+  .form {
+    margin-bottom: 4.1rem;
+
+    &__input {
+      height: 6.4rem;
+      font-size: 2rem;
+    }
+
+    &__search-btn {
+      top: 2.4rem;
+    }
+
+    &__input-error {
+      font-size: 1.9rem;
+    }
+  }
+}

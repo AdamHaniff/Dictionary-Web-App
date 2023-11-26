@@ -473,6 +473,54 @@ html {
     line-height: 2.16rem;
   }
 }
+@media only screen and (min-width: 48em) {
+  .body {
+    padding: 5.8rem 4rem 0;
+  }
+  .header {
+    margin-bottom: 5.15rem;
+  }
+  .header__logo {
+    width: 3.2rem;
+    height: 3.65rem;
+  }
+  .header__font-toggle-container {
+    gap: 2.6rem;
+  }
+  .header__font-container {
+    gap: 1.8rem;
+  }
+  .header__font {
+    font-size: 1.8rem;
+  }
+  .header__font-styles {
+    gap: 1.6rem;
+    width: 17.325rem;
+    height: 14.4rem;
+    padding: 2.275rem 0 0 2.275rem;
+    top: 4.1rem;
+  }
+  .header__font-style {
+    font-size: 1.7rem;
+    line-height: 2.275rem;
+  }
+  .header__toggle-moon-container {
+    gap: 2rem;
+  }
+  .form {
+    margin-bottom: 4.1rem;
+  }
+  .form__input {
+    height: 6.4rem;
+    font-size: 2rem;
+  }
+  .form__search-btn {
+    top: 2.4rem;
+  }
+  .form__input-error {
+    font-size: 1.9rem;
+  }
+}
 .hidden {
   display: none;
 }
