@@ -113,6 +113,10 @@
     font-size: 1.8rem;
   }
 
+  .word-example {
+    font-size: 1.8rem;
+  }
+
   .synonyms-container,
   .antonyms-container {
     margin-top: 4rem;
@@ -134,4 +138,28 @@
   }
 
   // ************* SOURCE *************
+  .source {
+    padding: 1.9rem 0 11.8rem;
+    gap: 2rem;
+  }
+
+  // *********** NOT FOUND ***********
+  .not-found {
+    margin-top: 11.4rem;
+
+    &__emoji {
+      font-size: 6.08rem;
+      margin-bottom: 4.18rem;
+    }
+
+    &__text {
+      font-size: 1.9rem;
+      margin-bottom: 2.28rem;
+    }
+
+    &__apology {
+      font-size: 1.71rem;
+      line-height: 2.28rem;
+    }
+  }
 }

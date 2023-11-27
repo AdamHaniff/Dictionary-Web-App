@@ -430,6 +430,9 @@ html {
   .word-meaning {
     font-size: 1.65rem;
   }
+  .word-example {
+    font-size: 1.65rem;
+  }
   .synonyms-container,
   .antonyms-container {
     margin-top: 3.2rem;
@@ -555,6 +558,9 @@ html {
   .word-meaning {
     font-size: 1.8rem;
   }
+  .word-example {
+    font-size: 1.8rem;
+  }
   .synonyms-container,
   .antonyms-container {
     margin-top: 4rem;
@@ -570,6 +576,123 @@ html {
   .synonym,
   .antonym {
     font-size: 2rem;
+  }
+  .source {
+    padding: 1.9rem 0 11.8rem;
+    gap: 2rem;
+  }
+  .not-found {
+    margin-top: 11.4rem;
+  }
+  .not-found__emoji {
+    font-size: 6.08rem;
+    margin-bottom: 4.18rem;
+  }
+  .not-found__text {
+    font-size: 1.9rem;
+    margin-bottom: 2.28rem;
+  }
+  .not-found__apology {
+    font-size: 1.71rem;
+    line-height: 2.28rem;
+  }
+}
+@media only screen and (min-width: 69em) {
+  .body {
+    padding: 5.8rem 19.6rem 0;
+  }
+  .header__font-styles {
+    width: 17.8rem;
+    height: 14.8rem;
+    padding: 2.3rem 0 0 2.3rem;
+    top: 4.15rem;
+  }
+  .header__font-style {
+    font-size: 1.75rem;
+    line-height: 2.3rem;
+  }
+  .form {
+    margin-bottom: 4.3rem;
+  }
+  .form__input-error {
+    font-size: 1.95rem;
+  }
+  .spinner {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+  .synonyms,
+  .antonyms {
+    gap: 1.9rem;
+  }
+  .source {
+    padding: 1.9rem 0 12.1rem;
+  }
+  .not-found {
+    margin-top: 12.3rem;
+  }
+  .not-found__emoji {
+    font-size: 6.2rem;
+    margin-bottom: 4.25rem;
+  }
+  .not-found__text {
+    font-size: 1.95rem;
+    margin-bottom: 2.3rem;
+  }
+  .not-found__apology {
+    font-size: 1.75rem;
+    line-height: 2.3rem;
+  }
+}
+@media only screen and (min-width: 90em) {
+  .body {
+    padding: 5.8rem 35.2rem 0;
+  }
+  .header__font-styles {
+    width: 18.3rem;
+    height: 15.2rem;
+    padding: 2.4rem 0 0 2.4rem;
+    top: 4.2rem;
+  }
+  .header__font-style {
+    font-size: 1.8rem;
+    line-height: 2.4rem;
+  }
+  .form {
+    margin-bottom: 4.5rem;
+  }
+  .form__input-error {
+    font-size: 2rem;
+  }
+  .spinner {
+    width: 3rem;
+    height: 3rem;
+  }
+  .synonyms-container,
+  .antonyms-container {
+    margin-top: 6.4rem;
+  }
+  .synonyms,
+  .antonyms {
+    gap: 2.1rem;
+  }
+  .source {
+    padding: 1.9rem 0 12.4rem;
+  }
+  .not-found {
+    margin-top: 13.2rem;
+  }
+  .not-found__emoji {
+    font-size: 6.4rem;
+    margin-bottom: 4.4rem;
+  }
+  .not-found__text {
+    font-size: 2rem;
+    margin-bottom: 2.4rem;
+  }
+  .not-found__apology {
+    font-size: 1.8rem;
+    line-height: 2.4rem;
   }
 }
 .hidden {
