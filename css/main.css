@@ -131,6 +131,7 @@ html {
   border-radius: 1.6rem;
   background: #f4f4f4;
   color: #2d2d2d;
+  caret-color: #a445ed;
   border: 0.1rem solid transparent;
   padding-left: 2.4rem;
   font-family: inherit;
@@ -693,6 +694,30 @@ html {
   .not-found__apology {
     font-size: 1.8rem;
     line-height: 2.4rem;
+  }
+}
+@media only screen and (min-width: 62em) {
+  .header__font-container:hover {
+    cursor: pointer;
+  }
+  .header__font-styles {
+    cursor: initial;
+  }
+  .header__font-style:hover {
+    cursor: pointer;
+    color: #a445ed;
+  }
+  .header__toggle-btn {
+    cursor: pointer;
+  }
+  .play-audio-btn:hover {
+    cursor: pointer;
+  }
+  .play-audio-btn:hover .play-audio-icon g circle {
+    opacity: 1;
+  }
+  .play-audio-btn:hover .play-audio-icon g path {
+    fill: #fff;
   }
 }
 .hidden {

@@ -1,0 +1,39 @@
+// ******* DESKTOP HOVER STATES *******
+
+// ********* 992px MEDIA QUERY ********
+@media only screen and (min-width: 62em) {
+  // ************* HEADER *************
+  .header {
+    &__font-container:hover {
+      cursor: pointer;
+    }
+
+    &__font-styles {
+      cursor: initial;
+    }
+
+    &__font-style:hover {
+      cursor: pointer;
+      color: $color-jasminePurple;
+    }
+
+    &__toggle-btn {
+      cursor: pointer;
+    }
+  }
+
+  // * WORD-PHONETIC-AUDIO-CONTAINER *
+  .play-audio {
+    &-btn:hover {
+      cursor: pointer;
+    }
+
+    &-btn:hover &-icon g circle {
+      opacity: 1;
+    }
+
+    &-btn:hover &-icon g path {
+      fill: $color-white;
+    }
+  }
+}
