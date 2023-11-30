@@ -36,4 +36,11 @@
       fill: $color-white;
     }
   }
+
+  // ********* WORD MEANINGS *********
+  .synonym:hover,
+  .antonym:hover {
+    cursor: pointer;
+    border-bottom: 0.1rem solid $color-jasminePurple;
+  }
 }

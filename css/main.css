@@ -297,6 +297,7 @@ html {
   color: #a445ed;
   font-size: 1.6rem;
   font-weight: 700;
+  border-bottom: 0.1rem solid transparent;
 }
 
 .source {
@@ -718,6 +719,11 @@ html {
   }
   .play-audio-btn:hover .play-audio-icon g path {
     fill: #fff;
+  }
+  .synonym:hover,
+  .antonym:hover {
+    cursor: pointer;
+    border-bottom: 0.1rem solid #a445ed;
   }
 }
 .hidden {
