@@ -23,6 +23,7 @@
 
   &__font-container {
     display: flex;
+    align-items: center;
     gap: 1.6rem;
     position: relative;
   }
@@ -78,6 +79,7 @@
 
   &__toggle-moon-container {
     display: flex;
+    align-items: center;
     gap: 1.2rem;
   }
 

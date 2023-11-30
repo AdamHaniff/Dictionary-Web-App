@@ -45,6 +45,7 @@ html {
 }
 .header__font-container {
   display: flex;
+  align-items: center;
   gap: 1.6rem;
   position: relative;
 }
@@ -92,6 +93,7 @@ html {
 }
 .header__toggle-moon-container {
   display: flex;
+  align-items: center;
   gap: 1.2rem;
 }
 .header__toggle-btn {
