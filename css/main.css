@@ -727,6 +727,10 @@ html {
     cursor: pointer;
     border-bottom: 0.1rem solid #a445ed;
   }
+  .source__link:hover, .source__link:active {
+    color: #a445ed;
+    border-bottom: 0.1rem solid #a445ed;
+  }
 }
 .hidden {
   display: none;

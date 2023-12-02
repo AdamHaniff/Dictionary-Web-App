@@ -43,4 +43,13 @@
     cursor: pointer;
     border-bottom: 0.1rem solid $color-jasminePurple;
   }
+
+  // ************ SOURCE ************
+  .source {
+    &__link:hover,
+    &__link:active {
+      color: $color-jasminePurple;
+      border-bottom: 0.1rem solid $color-jasminePurple;
+    }
+  }
 }
