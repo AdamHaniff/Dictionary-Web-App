@@ -160,7 +160,9 @@ function insertSource(data, word, resultsContainer) {
   const sourceLink = sourceUrls.find((url) => url.includes(`/${word}`));
   const sourceContainerHTML = `
 <div class="source ${colorTheme.isLightTheme ? "" : "source--dark"}">
-  <span class="source__text">Source</span>
+  <span class="source__text ${
+    colorTheme.isLightTheme ? "" : "source__text--dark"
+  }">Source</span>
   <div class="source__link-window">
     <a
       class="source__link ${
