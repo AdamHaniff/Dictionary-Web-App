@@ -108,12 +108,12 @@ function capitalizeFirstLetter(word) {
 
 // Helpers for 'color-themes.js'
 function toggleElementColor(elementClass, colorClass) {
-  element = document.querySelector(`.${elementClass}`);
+  const element = document.querySelector(`.${elementClass}`);
   if (element) element.classList.toggle(colorClass);
 }
 
 function toggleMultipleElementsColor(elementsClass, colorClass) {
-  elements = document.querySelectorAll(`.${elementsClass}`);
+  const elements = document.querySelectorAll(`.${elementsClass}`);
   if (elements) {
     for (let el of elements) {
       el.classList.toggle(colorClass);
