@@ -362,6 +362,17 @@
   }
 }
 
+// ******** 320px-346px LAYOUT ********
+@media only screen and (max-width: 21.625em) {
+  // ************* SOURCE *************
+  .source {
+    &__text,
+    &__link {
+      font-size: 1.25rem;
+    }
+  }
+}
+
 // ********* 572px LAYOUT **********
 @media only screen and (min-width: 35.75em) {
   .body {
